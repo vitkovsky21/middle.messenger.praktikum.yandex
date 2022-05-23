@@ -1,11 +1,11 @@
 {
   "name": "messenger",
   "version": "1.0.0",
-  "description": "",
+  "description": "Practicum Messenger",
   "main": "index.js",
   "scripts": {
-    "dev": "parcel index.html",
-    "build": "parcel build index.html"
+    "dev": "parcel static/index.html",
+    "start": "node index.js"
   },
   "author": "",
   "license": "ISC",
@@ -15,5 +15,8 @@
   },
   "dependencies": {
     "express": "^4.18.1"
+  },
+  "engines" : {
+    "node" : ">=14.18.1"
   }
 }

@@ -1,0 +1,16 @@
+extends ../../base/base-index.pug
+
+block content
+  .sign
+    form(novalidate id="form")
+      h3.heading Sign In
+      .fields
+        p Login
+        input(type="login" name="login" placeholder="" autocomplete="on" required minlength="4" id="login" class="field")
+        span.error
+        p Password
+        input(type="password" name="password" autocomplete="on" placeholder="" required minlength="8" id="password" class="field")
+        span.error
+      .buttons
+        button(type="submit" class="btn") Enter
+        a(href="./src/pages/signup/sign-up.html" class="btn link") Sign Up

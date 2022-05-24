@@ -4,7 +4,7 @@
   "description": "Practicum Messenger",
   "main": "index.js",
   "scripts": {
-    "dev": "parcel static/index.html --no-cache",
+    "dev": "(parcel ./static/index.html) & parcel watch ./static/index.html",
     "start": "node index.js"
   },
   "author": "",

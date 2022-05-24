@@ -1,5 +1,4 @@
 import { showError } from "./modules/loginError.js";
-import { form, login, loginError, password, passwordError } from "./modules/variables.js";
 
 form.addEventListener('submit', function (event) {
 

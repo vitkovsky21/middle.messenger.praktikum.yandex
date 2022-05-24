@@ -1,9 +1,8 @@
 import { signUpError } from "./modules/signUpError.js"
-import { form, login, loginError, password, passwordError, email, emailError, phone, phoneError, firstName, firstNameError, secondName, secondNameError } from "./modules/variables.js"
 
 form.addEventListener('submit', function (event) {
 
-    login.addEventListener('input', function () {
+    login.addEventListener('input', function (event) {
   
         if (login.validity.valid) {
           loginError.textContent = ''; 
@@ -15,7 +14,7 @@ form.addEventListener('submit', function (event) {
 
     });
 
-    password.addEventListener('input', function () {
+    password.addEventListener('input', function (event) {
 
         if (password.validity.valid) {
           passwordError.textContent = ''; 
@@ -27,7 +26,7 @@ form.addEventListener('submit', function (event) {
 
     });
 
-    email.addEventListener('input', function () {
+    email.addEventListener('input', function (event) {
 
         if (email.validity.valid) {
           emailError.textContent = ''; 
@@ -39,7 +38,7 @@ form.addEventListener('submit', function (event) {
 
     });
 
-    phone.addEventListener('input', function () {
+    phone.addEventListener('input', function (event) {
 
         if (phone.validity.valid) {
           phoneError.textContent = ''; 
@@ -51,7 +50,7 @@ form.addEventListener('submit', function (event) {
 
     });
 
-    first_name.addEventListener('input', function () {
+    first_name.addEventListener('input', function (event) {
 
         if (firstName.validity.valid) {
           firstNameError.textContent = ''; 
@@ -63,7 +62,7 @@ form.addEventListener('submit', function (event) {
 
     });
 
-    second_name.addEventListener('input', function () {
+    second_name.addEventListener('input', function (event) {
 
         if (secondName.validity.valid) {
           secondNameError.textContent = ''; 

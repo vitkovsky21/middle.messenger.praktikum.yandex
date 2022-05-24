@@ -36,7 +36,7 @@ form.addEventListener('submit', function (event) {
       event.preventDefault();
     }    
     else {
-      window.location.href = "main.html"
+      window.location.href = "./pages/main/main.html"
       event.preventDefault();
     }
 

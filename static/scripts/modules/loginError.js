@@ -15,7 +15,7 @@ export function showError() {
 
     // password
     if(password.validity.valueMissing) {
-      passwordError.textContent = 'You need to enter your password.';
+      passwordError.textContent = 'You need to enter your password!';
     } 
     else if(password.validity.typeMismatch) {
       passwordError.textContent = 'You need to enter your password.';

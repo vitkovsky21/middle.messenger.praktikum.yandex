@@ -1,0 +1,46 @@
+.sign {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    height: 100%;
+
+    form {
+        margin: 5.5rem auto;
+        padding: 5rem 2.5rem;
+        border: 2.2px solid #0984e3;
+        border-radius: 1rem;
+
+        .fields {
+            display: flex;
+            flex-direction: column;
+            padding: 5rem 0;
+        
+            p {
+                opacity: 60%;
+                margin-bottom: 0.1rem;
+            }
+        
+        }  
+
+        .buttons {
+            display: flex;
+            flex-direction: column;
+            margin-top: 2rem;
+
+            .link {
+                text-align: center;
+                background-color: #eee;
+                color: #0984e3;
+            }
+        }
+    }
+
+}
+
+.field {
+    width: 28rem;
+    margin-bottom: 1rem;
+    padding-top: 1.4rem;
+    border-bottom: 1px solid #0984e3;
+}

@@ -2,9 +2,10 @@
   "name": "messenger",
   "version": "1.0.0",
   "description": "Practicum Messenger",
-  "main": "index.js",
+  "main": false,
   "scripts": {
     "dev": "(parcel ./static/index.html) & parcel watch ./static/index.html",
+    "build": "parcel build static/index.html",
     "start": "node index.js"
   },
   "author": "",

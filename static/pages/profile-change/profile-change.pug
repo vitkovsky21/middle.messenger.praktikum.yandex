@@ -1,0 +1,29 @@
+extends ../profile.pug
+
+block profile 
+    ul.info
+        li.info-field 
+            p Email
+            a.value email@email.com
+        hr
+        li.info-field
+            p Login
+            a.value vladlogin
+        hr
+        li.info-field 
+            p First Name
+            a.value Vlad 
+        hr
+        li.info-field
+            p Second Name
+            a.value Vladov
+        hr
+        li.info-field 
+            p Display Name
+            a.value VladVladov
+        hr
+        li.info-field
+            p Phone
+            a.value +7 (777) 777 77 77
+    .links
+        a(href="./../errors/500.pug" class="btn") Save

@@ -1,0 +1,11 @@
+extends ../base/base-all.pug
+
+block content 
+    .wrapper
+        include includes/sidebar.pug
+        .profile-main
+            a(href="./../errors/404.pug")
+                .circle
+                    img(src="./../../assets/Union.png")
+                    p Change avatar
+            block profile

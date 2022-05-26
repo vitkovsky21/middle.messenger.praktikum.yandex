@@ -1,4 +1,4 @@
-import { showError } from "./modules/loginError.js";
+import { showError } from "./modules/loginError.js"
 
 form.addEventListener('submit', function (event) {
 
@@ -35,7 +35,7 @@ form.addEventListener('submit', function (event) {
       event.preventDefault();
     }    
     else {
-      window.location.href = "./pages/main/main.html"
+      window.location.href = "../pages/chat/desktop.html";
       event.preventDefault();
     }
 

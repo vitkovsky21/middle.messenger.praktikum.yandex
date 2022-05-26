@@ -87,11 +87,11 @@ form.addEventListener('submit', function (event) {
       signUpError();
       event.preventDefault();
     }
-    else if(!firstName.validity.valid) {
+    else if(!first_name.validity.valid) {
       signUpError();
       event.preventDefault();
     }  
-    else if(!secondName.validity.valid) {
+    else if(!second_name.validity.valid) {
       signUpError();
       event.preventDefault();
     }  
@@ -100,7 +100,7 @@ form.addEventListener('submit', function (event) {
       event.preventDefault();
     }        
     else {
-      window.location.href = "./../../index.html"
+      window.location.href = "../../index.html";
       event.preventDefault();
     }
 

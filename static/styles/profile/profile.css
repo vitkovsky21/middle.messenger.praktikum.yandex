@@ -39,6 +39,8 @@
 .profile-main h4 {
   font-size: 1.7rem;
   margin: 1.7rem 0;
+  display: flex;
+  justify-content: center;
 }
 .profile-main .info {
   margin: 2.5rem 0;
@@ -75,7 +77,7 @@
   border-radius: 60px;
   width: 12rem;
   height: 12rem;
-  margin: 4rem;
+  margin: 4rem auto;
   opacity: 60%;
 }
 .circle p {

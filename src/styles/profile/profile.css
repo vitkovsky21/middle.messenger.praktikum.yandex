@@ -1,0 +1,121 @@
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  width: 10%;
+  height: 100%;
+  background-color: #fbfbfb;
+  border-left: 2.2px solid #d6dadc;
+  border-right: 2.2px solid #d6dadc;
+  overflow-y: hidden;
+  overflow-x: hidden;
+}
+.sidebar a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  right: 0.5rem;
+  width: 50%;
+  height: 100%;
+  align-self: center;
+  transform: scaleX(-1);
+  background: url(../../assets/button.png) 50% 50% no-repeat;
+}
+
+.sidebar a:hover {
+  cursor: pointer;
+  background: url(../../assets/button.png) 50% 50% no-repeat;
+}
+
+.profile-main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 90%;
+  height: 74.8rem;
+  border-right: 2.2px solid #d6dadc;
+}
+.profile-main h4 {
+  font-size: 1.7rem;
+  margin: 1.7rem 0;
+  display: flex;
+  justify-content: center;
+}
+.profile-main .info {
+  margin: 2.5rem 0;
+}
+.profile-main .info .info-field {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  margin: 1rem;
+  width: 40rem;
+  font-size: 1.3rem;
+}
+.profile-main .info .info-field div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  width: 300%;
+}
+.profile-main .info .info-field .field {
+  text-align: right;
+  border-bottom: none !important;
+  padding-top: 0rem !important;
+  margin-bottom: 0 !important;
+}
+.profile-main .info .info-field .error {
+  opacity: 70%;
+  position: relative;
+  left: 70%;
+  width: 10%;
+}
+.profile-main .info .info-field .error:hover {
+  cursor: pointer;
+}
+.profile-main .links {
+  display: flex;
+  flex-direction: column;
+  width: 41.5rem;
+  margin: 2.5rem 0;
+}
+.profile-main .links a {
+  margin: 1rem;
+  font-size: 1.3rem;
+  color: #0984e3;
+  background: none;
+  padding: 0rem 0rem;   
+}
+
+.circle {
+  background-color: #9ea1a3;
+  border-radius: 60px;
+  width: 12rem;
+  height: 12rem;
+  margin: 4rem auto;
+  opacity: 60%;
+}
+.circle p {
+  margin: 0 auto;
+  position: relative;
+  top: 7rem;
+  left: 2.5rem;
+  color: black;
+}
+.circle .picture {
+  background: url(../../assets/Union.png) 50% 50% no-repeat;
+  width: 5rem;
+  height: 5rem;
+  position: relative;
+  left: 3.5rem;
+  top: 3.5rem;
+}
+.circle:hover {
+  cursor: pointer;
+  opacity: 80%;
+}
+
+/*# sourceMappingURL=profile.css.map */

@@ -4,7 +4,6 @@ import Chat from '../chat';
 import SignUpPage from '../signUpPage';
 
 export class LoginPage extends Block {
-  
   protected getStateFromProps() {
     this.state = {
       values: {
@@ -18,7 +17,7 @@ export class LoginPage extends Block {
       login: () => {
         const loginData = {
           login: (this.refs.login as HTMLInputElement).value,
-          password: (this.refs.password as HTMLInputElement).value
+          password: (this.refs.password as HTMLInputElement).value,
         };
 
         const nextState = {
@@ -30,20 +29,20 @@ export class LoginPage extends Block {
         };
 
         const loginValidate = /^[a-z0-9_-]{3,20}$/i.test(loginData.login);
-        const passwordValidate = /^(?=.*\d)(?=.*[A-Z])\w{8,40}$/i.test(loginData.password)
+        const passwordValidate = /^(?=.*\d)(?=.*[A-Z])\w{8,40}$/i.test(loginData.password);
 
         if (!loginData.login) {
           nextState.errors.login = 'Login is required';
         } else if (loginData.login.length < 4) {
           nextState.errors.login = 'Login should contain more than 3 chars';
         } else if (!loginValidate) {
-          nextState.errors.login = 'Invalid login'
+          nextState.errors.login = 'Invalid login';
         }
 
         if (!loginData.password) {
           nextState.errors.password = 'Password is required';
         } else if (!passwordValidate) {
-          nextState.errors.password = 'Invalid password'
+          nextState.errors.password = 'Invalid password';
         }
 
         this.setState(nextState);
@@ -60,7 +59,7 @@ export class LoginPage extends Block {
       focus: () => {
         const loginValidateData = {
           login: (this.refs.login as HTMLInputElement).value,
-          password: (this.refs.password as HTMLInputElement).value
+          password: (this.refs.password as HTMLInputElement).value,
         };
 
         const nextValidateState = {
@@ -74,7 +73,7 @@ export class LoginPage extends Block {
       blur: () => {
         const loginData = {
           login: (this.refs.login as HTMLInputElement).value,
-          password: (this.refs.password as HTMLInputElement).value
+          password: (this.refs.password as HTMLInputElement).value,
         };
 
         const nextState = {
@@ -86,25 +85,25 @@ export class LoginPage extends Block {
         };
 
         const loginValidate = /^[a-z0-9_-]{3,20}$/i.test(loginData.login);
-        const passwordValidate = /^(?=.*\d)(?=.*[A-Z])\w{8,40}$/i.test(loginData.password)
+        const passwordValidate = /^(?=.*\d)(?=.*[A-Z])\w{8,40}$/i.test(loginData.password);
 
         if (!loginData.login) {
           nextState.errors.login = 'Login is required';
         } else if (loginData.login.length < 3) {
           nextState.errors.login = 'Login should contain more than 3 chars';
         } else if (!loginValidate) {
-          nextState.errors.login = 'Invalid login'
+          nextState.errors.login = 'Invalid login';
         }
 
         if (!loginData.password) {
           nextState.errors.password = 'Password is required';
         } else if (!passwordValidate) {
-          nextState.errors.password = 'Invalid password'
+          nextState.errors.password = 'Invalid password';
         }
-        
+
         this.setState(nextState);
       },
-    }
+    };
   }
 
   render() {

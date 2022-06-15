@@ -1,27 +1,27 @@
 import { renderDOM } from '../../core';
 import Block from '../../core/Block';
-import profilePage from '../profilePage';
+import ProfilePage from '../profilePage';
 
 export class Chat extends Block {
   protected getStateFromProps() {
     this.state = {
       values: {
-        message: ''
+        message: '',
       },
       errors: {
-        message: ''
+        message: '',
       },
       toProfilePage: () => {
-        renderDOM(new profilePage({}));
+        renderDOM(new ProfilePage({}));
       },
       send: () => {
         const chatData = {
-          message: (this.refs.message as HTMLInputElement).value
+          message: (this.refs.message as HTMLInputElement).value,
         };
 
         const nextState = {
           errors: {
-            message: ''
+            message: '',
           },
           values: { ...chatData },
         };
@@ -33,9 +33,8 @@ export class Chat extends Block {
         this.setState(nextState);
 
         console.log('action/message', chatData);
-
-      }
-    }
+      },
+    };
   }
 
   render() {

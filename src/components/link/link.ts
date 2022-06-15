@@ -7,11 +7,13 @@ interface LinkProps {
 }
 
 export class Link extends Block {
-  constructor({text, to, onClick}: LinkProps) {
-    super({text, to, events: { click: onClick }});
+  constructor({ text, to, onClick }: LinkProps) {
+    super({ text, to, events: { click: onClick } });
   }
 
   render() {
-    return `<a class="btn link">{{text}}</a>`;
+    return `
+      <a class="btn link">{{text}}</a>
+    `;
   }
 }

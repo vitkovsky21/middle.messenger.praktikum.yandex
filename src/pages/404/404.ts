@@ -3,16 +3,15 @@ import Block from '../../core/Block';
 import Chat from '../chat';
 
 export class errorExist extends Block {
-    protected getStateFromProps() {
-        this.state = {
-            toChat: () => {
-                renderDOM(new Chat({}));
-            }
-        }
-      }
+  protected getStateFromProps() {
+    this.state = {
+      toChat: () => {
+        renderDOM(new Chat({}));
+      },
+    };
+  }
 
   render() {
-
     return `
         <div class="errors">
           <h2 class="heading">404</h2>

@@ -12,8 +12,12 @@ interface InputProps {
 }
 
 export class Input extends Block {
-  constructor({onBlur = () => {}, onFocus = () => {}, type = 'text', minlength, error, id, placeholder, value }: InputProps) {
-    super({type, placeholder, value, error, minlength, id, events: {blur: onBlur, focus: onFocus}});
+  constructor({
+    onBlur = () => {}, onFocus = () => {}, type = 'text', minlength, error, id, placeholder, value,
+  }: InputProps) {
+    super({
+      type, placeholder, value, error, minlength, id, events: { blur: onBlur, focus: onFocus },
+    });
   }
 
   protected render(): string {
@@ -23,6 +27,6 @@ export class Input extends Block {
         placeholder="{{placeholder}}" 
         value="{{value}}"
         class="field"/>
-    `
+    `;
   }
 }

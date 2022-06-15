@@ -10,9 +10,9 @@ export class SignUpPage extends Block {
         login: '',
         password: '',
         first_name: '',
-        second_name:  '',
+        second_name: '',
         phone: '',
-        email: ''
+        email: '',
       },
       errors: {
         login: '',
@@ -20,7 +20,7 @@ export class SignUpPage extends Block {
         first_name: '',
         second_name: '',
         phone: '',
-        email: ''
+        email: '',
       },
       signUp: () => {
         const signUpData = {
@@ -39,70 +39,70 @@ export class SignUpPage extends Block {
             first_name: '',
             second_name: '',
             phone: '',
-            email: ''
+            email: '',
           },
           values: { ...signUpData },
         };
 
         const loginValidate = /^[a-z0-9_-]{3,20}$/i.test(signUpData.login);
-        const passwordValidate = /^(?=.*[0-9])(?=.*[A-Z])\w{8,40}$/i.test(signUpData.password)
+        const passwordValidate = /^(?=.*[0-9])(?=.*[A-Z])\w{8,40}$/i.test(signUpData.password);
         const emailValidate = /^[a-z0-9_-].+@[a-z0-9_-]+\.[a-z0-9_-]+$/i.test(signUpData.email);
         const firstNameValidate = /^[a-zA-Zа-яёА-ЯЁ_-]+$/i.test(signUpData.first_name);
         const secondNameValidate = /^[a-zA-Zа-яёА-ЯЁ_-]+$/i.test(signUpData.second_name);
-        const phoneValidate = /^\+?(\d.*){10,15}$/i.test(signUpData.phone)
+        const phoneValidate = /^\+?(\d.*){10,15}$/i.test(signUpData.phone);
 
         if (!signUpData.login) {
           nextState.errors.login = 'Login is required';
         } else if (signUpData.login.length < 4) {
           nextState.errors.login = 'Login should contain more than 3 chars';
         } else if (!loginValidate) {
-          nextState.errors.login = 'Invalid login'
+          nextState.errors.login = 'Invalid login';
         }
 
         if (!signUpData.password) {
           nextState.errors.password = 'Password is required';
         } else if (!passwordValidate) {
-          nextState.errors.password = 'Invalid password'
+          nextState.errors.password = 'Invalid password';
         }
 
         if (!signUpData.first_name) {
           nextState.errors.first_name = 'First Name is required';
         } else if (signUpData.first_name[0].toUpperCase() !== signUpData.first_name[0]) {
-          nextState.errors.first_name = 'First letter should be uppercase'
+          nextState.errors.first_name = 'First letter should be uppercase';
         } else if (!firstNameValidate) {
-          nextState.errors.first_name = 'Invalid first name'
+          nextState.errors.first_name = 'Invalid first name';
         }
 
         if (!signUpData.second_name) {
           nextState.errors.second_name = 'Second Name is required';
         } else if (signUpData.second_name[0].toUpperCase() !== signUpData.second_name[0]) {
-          nextState.errors.second_name = 'Second letter should be uppercase'
+          nextState.errors.second_name = 'Second letter should be uppercase';
         } else if (!secondNameValidate) {
-          nextState.errors.second_name = 'Invalid second name'
+          nextState.errors.second_name = 'Invalid second name';
         }
 
         if (!signUpData.phone) {
           nextState.errors.phone = 'Phone is required';
         } else if (!phoneValidate) {
-          nextState.errors.phone = 'Invalid phone'
+          nextState.errors.phone = 'Invalid phone';
         }
 
         if (!signUpData.email) {
           nextState.errors.email = 'Email is required';
         } else if (!emailValidate) {
-          nextState.errors.email = 'Invalid email'
+          nextState.errors.email = 'Invalid email';
         }
 
         this.setState(nextState);
 
-        if (!nextState.errors.login && 
-            !nextState.errors.password &&
-            !nextState.errors.email &&
-            !nextState.errors.first_name &&
-            !nextState.errors.second_name &&
-            !nextState.errors.phone) {
-        renderDOM(new Chat({}));
-      }
+        if (!nextState.errors.login
+            && !nextState.errors.password
+            && !nextState.errors.email
+            && !nextState.errors.first_name
+            && !nextState.errors.second_name
+            && !nextState.errors.phone) {
+          renderDOM(new Chat({}));
+        }
 
         console.log('action/signUp', signUpData);
       },
@@ -116,7 +116,7 @@ export class SignUpPage extends Block {
           first_name: (this.refs.first_name as HTMLInputElement).value,
           second_name: (this.refs.second_name as HTMLInputElement).value,
           phone: (this.refs.phone as HTMLInputElement).value,
-          email: (this.refs.email as HTMLInputElement).value
+          email: (this.refs.email as HTMLInputElement).value,
         };
 
         const nextState = {
@@ -126,66 +126,64 @@ export class SignUpPage extends Block {
             first_name: '',
             second_name: '',
             phone: '',
-            email: ''
+            email: '',
           },
           values: { ...signUpData },
         };
 
         const loginValidate = /^[a-z0-9_-]{3,20}$/i.test(signUpData.login);
-        const passwordValidate = /^(?=.*[0-9])(?=.*[A-Z])\w{8,40}$/i.test(signUpData.password)
+        const passwordValidate = /^(?=.*[0-9])(?=.*[A-Z])\w{8,40}$/i.test(signUpData.password);
         const emailValidate = /^[a-z0-9_-].+@[a-z0-9_-]+\.[a-z0-9_-]+$/i.test(signUpData.email);
         const firstNameValidate = /^[a-zA-Zа-яёА-ЯЁ_-]+$/i.test(signUpData.first_name);
         const secondNameValidate = /^[a-zA-Zа-яёА-ЯЁ_-]+$/i.test(signUpData.second_name);
-        const phoneValidate = /^\+?(\d.*){10,15}$/i.test(signUpData.phone)
+        const phoneValidate = /^\+?(\d.*){10,15}$/i.test(signUpData.phone);
 
         if (!signUpData.login) {
           nextState.errors.login = 'Login is required';
         } else if (signUpData.login.length < 4) {
           nextState.errors.login = 'Login should contain more than 3 chars';
         } else if (!loginValidate) {
-          nextState.errors.login = 'Invalid login'
+          nextState.errors.login = 'Invalid login';
         }
 
         if (!signUpData.password) {
           nextState.errors.password = 'Password is required';
         } else if (!passwordValidate) {
-          nextState.errors.password = 'Invalid password'
+          nextState.errors.password = 'Invalid password';
         }
 
         if (!signUpData.email) {
           nextState.errors.email = 'Email is required';
         } else if (!emailValidate) {
-          nextState.errors.email = 'Invalid email'
+          nextState.errors.email = 'Invalid email';
         }
 
         if (!signUpData.first_name) {
           nextState.errors.first_name = 'First Name is required';
         } else if (signUpData.first_name[0].toUpperCase() !== signUpData.first_name[0]) {
-          nextState.errors.first_name = 'First letter should be uppercase'
+          nextState.errors.first_name = 'First letter should be uppercase';
         } else if (!firstNameValidate) {
-          nextState.errors.first_name = 'Invalid first name'
+          nextState.errors.first_name = 'Invalid first name';
         }
 
         if (!signUpData.second_name) {
           nextState.errors.second_name = 'Second Name is required';
         } else if (signUpData.second_name[0].toUpperCase() !== signUpData.second_name[0]) {
-          nextState.errors.second_name = 'Second letter should be uppercase'
+          nextState.errors.second_name = 'Second letter should be uppercase';
         } else if (!secondNameValidate) {
-          nextState.errors.second_name = 'Invalid second name'
+          nextState.errors.second_name = 'Invalid second name';
         }
 
         if (!signUpData.phone) {
           nextState.errors.phone = 'Phone is required';
         } else if (!phoneValidate) {
-          nextState.errors.phone = 'Invalid phone'
+          nextState.errors.phone = 'Invalid phone';
         }
-        
+
         this.setState(nextState);
       },
-    }
+    };
   }
-
-
 
   render() {
     const { errors, values } = this.state;

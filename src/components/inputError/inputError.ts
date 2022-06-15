@@ -12,6 +12,6 @@ export class InputError extends Block {
   protected render(): string {
     return `
         <div class="error">{{#if error}}{{error}}{{/if}}</div>
-    `
+    `;
   }
 }

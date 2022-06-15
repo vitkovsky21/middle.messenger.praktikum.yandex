@@ -1,24 +1,23 @@
 import { renderDOM } from '../../core';
 import Block from '../../core/Block';
-import Chat from '../chat';
-import loginPage from '../loginPage';
-import profileChange from '../profileChange';
-import profilePassword from '../profilePassword';
+import LoginPage from '../loginPage';
+import ProfileChange from '../profileChange';
+import ProfilePassword from '../profilePassword';
 
 export class ProfilePage extends Block {
-    protected getStateFromProps() {
-        this.state = {
-            exit: () => {
-              renderDOM(new loginPage({}));
-            },
-            profileChange: () => {
-              renderDOM(new profileChange({}));
-            },
-            profilePassword: () => {
-              renderDOM(new profilePassword({}));
-            }
-        }
-      }
+  protected getStateFromProps() {
+    this.state = {
+      exit: () => {
+        renderDOM(new LoginPage({}));
+      },
+      profileChange: () => {
+        renderDOM(new ProfileChange({}));
+      },
+      profilePassword: () => {
+        renderDOM(new ProfilePassword({}));
+      },
+    };
+  }
 
   render() {
     return `

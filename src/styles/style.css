@@ -1,21 +1,22 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700&display=swap");
-@import url("./main/main.css");
-@import url("./profile/profile.css");
-@import url("./errors/errors.css");
-@import url("./partials/error/error.css");
-@import url("./partials/btn/btn.css");
-@import url("./partials/heading/heading.css");
-@import url("./partials/sign/sign.css");
+@import "https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700&display=swap";
+@import "./main/main.css";
+@import "./profile/profile.css";
+@import "./errors/errors.css";
+@import "./partials/error/error.css";
+@import "./partials/btn/btn.css";
+@import "./partials/heading/heading.css";
+@import "./partials/sign/sign.css";
+
 * {
-  font-family: "Inter", sans-serif;
+  font-family: Inter, sans-serif;
   margin: 0;
   padding: 0;
-  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
   box-sizing: border-box;
   text-decoration: none;
   outline: none;
   border: none;
-  -webkit-transition: all 0.2s linear;
+  transition: all 0.2s linear;
   transition: all 0.2s linear;
 }
 
@@ -72,8 +73,7 @@ ul {
   height: 100%;
   overflow-y: hidden !important;
 }
+
 .wrapper::-webkit-scrollbar {
   width: 0;
 }
-
-/*# sourceMappingURL=style.css.map */

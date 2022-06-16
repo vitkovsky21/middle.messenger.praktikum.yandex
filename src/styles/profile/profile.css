@@ -9,6 +9,7 @@
   overflow-y: hidden;
   overflow-x: hidden;
 }
+
 .sidebar a {
   display: flex;
   align-items: center;
@@ -36,15 +37,18 @@
   height: 74.8rem;
   border-right: 2.2px solid #d6dadc;
 }
+
 .profile-main h4 {
   font-size: 1.7rem;
   margin: 1.7rem 0;
   display: flex;
   justify-content: center;
 }
+
 .profile-main .info {
   margin: 2.5rem 0;
 }
+
 .profile-main .info .info-field {
   display: flex;
   justify-content: space-between;
@@ -54,6 +58,7 @@
   width: 40rem;
   font-size: 1.3rem;
 }
+
 .profile-main .info .info-field div {
   display: flex;
   justify-content: space-between;
@@ -61,33 +66,38 @@
   flex-direction: row;
   width: 300%;
 }
+
 .profile-main .info .info-field .field {
   text-align: right;
   border-bottom: none !important;
-  padding-top: 0rem !important;
+  padding-top: 0 !important;
   margin-bottom: 0 !important;
 }
+
 .profile-main .info .info-field .error {
-  opacity: 70%;
+  opacity: 0.7;
   position: relative;
   left: 70%;
   width: 10%;
 }
+
 .profile-main .info .info-field .error:hover {
   cursor: pointer;
 }
+
 .profile-main .links {
   display: flex;
   flex-direction: column;
   width: 41.5rem;
   margin: 2.5rem 0;
 }
+
 .profile-main .links a {
   margin: 1rem;
   font-size: 1.3rem;
   color: #0984e3;
   background: none;
-  padding: 0rem 0rem;   
+  padding: 0;
 }
 
 .circle {
@@ -96,8 +106,9 @@
   width: 12rem;
   height: 12rem;
   margin: 4rem auto;
-  opacity: 60%;
+  opacity: 0.6;
 }
+
 .circle p {
   margin: 0 auto;
   position: relative;
@@ -105,6 +116,7 @@
   left: 2.5rem;
   color: black;
 }
+
 .circle .picture {
   background: url(../../assets/Union.png) 50% 50% no-repeat;
   width: 5rem;
@@ -113,9 +125,8 @@
   left: 3.5rem;
   top: 3.5rem;
 }
+
 .circle:hover {
   cursor: pointer;
-  opacity: 80%;
+  opacity: 0.8;
 }
-
-/*# sourceMappingURL=profile.css.map */

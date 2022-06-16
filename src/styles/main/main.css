@@ -10,16 +10,20 @@
   overflow-y: scroll;
   overflow-x: hidden;
 }
+
 .list::-webkit-scrollbar {
   width: 0.7rem;
 }
+
 .list::-webkit-scrollbar-track {
   background: #d6dadc;
 }
+
 .list::-webkit-scrollbar-thumb {
   background: #0984e3;
   border-radius: 5rem;
 }
+
 .list a {
   margin: 0.2rem 0;
   font-size: 1.4rem;
@@ -28,30 +32,35 @@
   color: black;
   background: none;
 }
+
 .list a:hover {
   cursor: pointer;
   background: none;
 }
+
 .list .field {
   position: relative;
   left: 0.55rem;
-  margin: 0 0 20px 0;
+  margin: 0 0 20px;
   padding: 5px 2px;
   border-bottom: none;
   background-color: #efefef;
 }
+
 .list .field::placeholder {
   font-size: 1.3rem;
   font-weight: bold;
-  opacity: 80%;
+  opacity: 0.8;
   text-align: center;
 }
+
 .list .friend-list .friend {
   display: flex;
   flex-direction: row;
   padding: 2rem 0;
   width: 35rem;
 }
+
 .list .friend-list .friend .image {
   width: 14%;
   height: 5rem;
@@ -60,22 +69,27 @@
   background-image: url(../../assets/pic.png);
   background-size: cover;
 }
+
 .list .friend-list .friend .info {
   margin-left: 2rem;
 }
+
 .list .friend-list .friend .info h4 {
   font-size: 1.6rem;
 }
+
 .list .friend-list .friend .info p {
   font-size: 1.3rem;
   font-weight: bold;
-  opacity: 60%;
+  opacity: 0.6;
 }
+
 .list .friend-list .friend .time {
   margin-left: 9.5rem;
   position: relative;
   top: 0.2rem;
 }
+
 .list .friend-list .friend:hover {
   cursor: pointer;
   transform: scale(0.9);
@@ -86,6 +100,7 @@
   height: 100%;
   border-right: 2.2px solid #d6dadc;
 }
+
 .chat .messages {
   justify-content: center;
   align-items: center;
@@ -93,14 +108,17 @@
   height: 95%;
   display: flex;
 }
+
 .chat .messages p {
-  opacity: 70%;
+  opacity: 0.7;
   letter-spacing: 0.2rem;
 }
+
 .chat .line {
   position: relative;
   bottom: 1.8rem;
 }
+
 .chat .message-input {
   background-color: #fbfbfb;
   position: fixed;
@@ -111,6 +129,7 @@
   display: flex;
   justify-content: flex-start;
 }
+
 .chat .message-input .field {
   background-color: #efefef;
   border-radius: 10px/20px;
@@ -121,24 +140,25 @@
   bottom: 1.1rem;
   width: 75%;
 }
+
 .chat .message-input .field::placeholder {
   font-size: 1.3rem;
   font-weight: bold;
-  opacity: 80%;
+  opacity: 0.8;
   text-align: center;
 }
+
 .chat .message-input a {
   margin-left: 2.5rem !important;
   margin-bottom: 0.3rem !important;
   position: fixed !important;
   bottom: 0.85rem !important;
-  right: -.7rem;
+  right: -0.7rem;
   background: none;
   background: url(../../assets/button.png) 20% 100% no-repeat;
   height: 100%;
 }
+
 .chat .message-input .btn .link:hover {
   cursor: pointer;
 }
-
-/*# sourceMappingURL=main.css.map */

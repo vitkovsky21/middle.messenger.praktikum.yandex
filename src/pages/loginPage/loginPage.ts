@@ -56,20 +56,6 @@ export class LoginPage extends Block {
       signUp: () => {
         renderDOM(new SignUpPage({}));
       },
-      focus: () => {
-        const loginValidateData = {
-          login: (this.refs.login as HTMLInputElement).value,
-          password: (this.refs.password as HTMLInputElement).value,
-        };
-
-        const nextValidateState = {
-          errors: {
-            login: '',
-            password: '',
-          },
-          values: { ...loginValidateData },
-        };
-      },
       blur: () => {
         const loginData = {
           login: (this.refs.login as HTMLInputElement).value,
@@ -121,7 +107,6 @@ export class LoginPage extends Block {
                   type="text" 
                   name="login"
                   onBlur=blur
-                  onFocus=focus
                   ref="login"
                   id="login" 
                   placeholder="" }}}

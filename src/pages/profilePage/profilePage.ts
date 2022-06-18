@@ -1,6 +1,6 @@
 import { renderDOM } from '../../core';
 import Block from '../../core/Block';
-import Chat from '../chat'
+import Chat from '../chat';
 import LoginPage from '../loginPage';
 import ProfileChange from '../profileChange';
 import ProfilePassword from '../profilePassword';
@@ -12,7 +12,7 @@ export class ProfilePage extends Block {
         renderDOM(new LoginPage({}));
       },
       toChat: () => {
-        renderDOM(new Chat({}))
+        renderDOM(new Chat({}));
       },
       profileChange: () => {
         renderDOM(new ProfileChange({}));

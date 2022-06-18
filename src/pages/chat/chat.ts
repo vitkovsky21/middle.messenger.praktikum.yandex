@@ -38,7 +38,7 @@ export class Chat extends Block {
   }
 
   render() {
-    const { errors, values } = this.state;
+    const { values } = this.state;
 
     return `
       <div class="wrapper">

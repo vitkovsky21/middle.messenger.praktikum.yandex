@@ -70,27 +70,27 @@
   background-size: cover;
 }
 
-.list .friend-list .friend .info {
+.friend .info {
   margin-left: 2rem;
 }
 
-.list .friend-list .friend .info h4 {
+.friend .info h4 {
   font-size: 1.6rem;
 }
 
-.list .friend-list .friend .info p {
+.friend .info p {
   font-size: 1.3rem;
   font-weight: bold;
   opacity: 0.6;
 }
 
-.list .friend-list .friend .time {
+.friend .time {
   margin-left: 9.5rem;
   position: relative;
   top: 0.2rem;
 }
 
-.list .friend-list .friend:hover {
+.friend:hover {
   cursor: pointer;
   transform: scale(0.9);
 }

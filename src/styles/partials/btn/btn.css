@@ -1,0 +1,15 @@
+.btn {
+  margin-top: 1rem;
+  text-align: center;
+  display: inline-block;
+  border-radius: 0.5rem;
+  padding: 1rem 3rem;
+  font-size: 1.7rem;
+  color: #fff;
+  cursor: pointer;
+  background: #0984e3;
+}
+
+.btn:hover {
+  background: #666;
+}

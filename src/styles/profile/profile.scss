@@ -97,12 +97,22 @@
 }
 
 .circle {
-    background-color: hsl(204, 3%, 63%);
+    background-color: #9ea1a3;
     border-radius: 60px;
     width: 12rem;
     height: 12rem;
     margin: 4rem auto;
-    opacity: 60%;
+
+    .avatar-label {
+        margin: 0 auto;
+        position: relative;
+        top: -6rem;
+        color: black;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
 
     p {
         margin: 0 auto;
@@ -110,9 +120,38 @@
         top: 7rem;
         left: 2.5rem;
         color: black;
+
+        &:hover {
+            cursor: pointer;
+        }
     }
 
-    img {
+    input {
+        width: 0.1px;
+        height: 0.1px;
+        opacity: 0;
+        position: absolute;
+        z-index: -10;
+    }
+
+    button {
+        margin: 0 auto;
+        position: relative;
+        top: 7.5rem;
+        left: 3.8rem;
+        color: black;
+        font-size: 1.3rem !important;
+        background: none;
+        padding: 0 0;
+
+        &:hover {
+            opacity: 70%;
+            background-color: #bfc2c5;
+        }
+    }
+
+    .picture {
+        background: url(../../assets/Union.png) 50% 50% no-repeat;
         width: 5rem;
         height: 5rem;
         position: relative;
@@ -120,9 +159,18 @@
         top: 3.5rem;
     }
 
+    img {
+        background: url(../../assets/Union.png) 50% 50% no-repeat;
+        width: 100%;
+        height: 100%;
+        position: relative;
+        border-radius: 60px;
+        opacity: 0.6;
+    }
+
     &:hover {
         cursor: pointer;
-        opacity: 80%;
+        opacity: 0.8;
     }
 }
 

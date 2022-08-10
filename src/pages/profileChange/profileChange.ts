@@ -1,15 +1,21 @@
-import { renderDOM } from '../../core';
+import { BrowseRouter, Store } from '../../core';
 import Block from '../../core/Block';
-import Chat from '../chat';
-import ProfilePage from '../profilePage';
+import { changeData } from '../../services/changeData';
+import { withRouter, withStore } from '../../utils';
 
-export class ProfileChange extends Block {
+type ProfileChangePageProps = {
+  router: BrowseRouter;
+  store: Store<AppState>;
+};
+
+export class ProfileChangePage extends Block<ProfileChangePageProps> {
   protected getStateFromProps() {
     this.state = {
       values: {
         login: '',
         first_name: '',
         second_name: '',
+        display_name: '',
         phone: '',
         email: '',
       },
@@ -17,17 +23,19 @@ export class ProfileChange extends Block {
         login: '',
         first_name: '',
         second_name: '',
+        display_name: '',
         phone: '',
         email: '',
       },
-      toChat: () => {
-        renderDOM(new Chat({}));
+      back: () => {
+        this.props.router.go("/profilePage");
       },
       blur: () => {
         const profileData = {
           login: (this.refs.login as HTMLInputElement).value,
           first_name: (this.refs.first_name as HTMLInputElement).value,
           second_name: (this.refs.second_name as HTMLInputElement).value,
+          display_name: (this.refs.display_name as HTMLInputElement).value,
           phone: (this.refs.phone as HTMLInputElement).value,
           email: (this.refs.email as HTMLInputElement).value,
         };
@@ -37,6 +45,7 @@ export class ProfileChange extends Block {
             login: '',
             first_name: '',
             second_name: '',
+            display_name: '',
             phone: '',
             email: '',
           },
@@ -71,6 +80,12 @@ export class ProfileChange extends Block {
           nextState.errors.second_name = 'Second letter should be uppercase';
         } else if (!secondNameValidate) {
           nextState.errors.second_name = 'Invalid second name';
+        }
+
+        if (!profileData.display_name) {
+          nextState.errors.display_name = 'Display name is required';
+        } else if (profileData.display_name.length < 2) {
+          nextState.errors.display_name = 'Display name should contain more than 3 chars';
         }
 
         if (!profileData.phone) {
@@ -92,6 +107,7 @@ export class ProfileChange extends Block {
           login: (this.refs.login as HTMLInputElement).value,
           first_name: (this.refs.first_name as HTMLInputElement).value,
           second_name: (this.refs.second_name as HTMLInputElement).value,
+          display_name: (this.refs.display_name as HTMLInputElement).value,
           phone: (this.refs.phone as HTMLInputElement).value,
           email: (this.refs.email as HTMLInputElement).value,
         };
@@ -101,6 +117,7 @@ export class ProfileChange extends Block {
             login: '',
             first_name: '',
             second_name: '',
+            display_name: '',
             phone: '',
             email: '',
           },
@@ -137,6 +154,12 @@ export class ProfileChange extends Block {
           nextState.errors.second_name = 'Invalid second name';
         }
 
+        if (!profileData.display_name) {
+          nextState.errors.display_name = 'Display name is required';
+        } else if (profileData.display_name.length < 2) {
+          nextState.errors.display_name = 'Display name should contain more than 3 chars';
+        }
+
         if (!profileData.phone) {
           nextState.errors.phone = 'Phone is required';
         } else if (!phoneValidate) {
@@ -155,8 +178,9 @@ export class ProfileChange extends Block {
               && !nextState.errors.email
               && !nextState.errors.first_name
               && !nextState.errors.second_name
+              && !nextState.errors.display_name
               && !nextState.errors.phone) {
-          renderDOM(new ProfilePage({}));
+                this.props.store.dispatch(changeData, profileData);
         }
 
         console.log('action/profileChange', profileData);
@@ -170,14 +194,13 @@ export class ProfileChange extends Block {
     return `
         <div class="wrapper">
           <div class="sidebar">
-              {{{Link onClick=toChat }}}
+              {{{Link onClick=back }}}
           </div>
 
           <div class="profile-main">
             <a onClick=toChat>
               <div class="circle">
                 <div class="picture"></div>
-                <p>Change avatar</p>
               </div>
             </a>
 
@@ -191,7 +214,7 @@ export class ProfileChange extends Block {
                       ref="email"
                       onBlur=blur
                       type="email"
-                      placeholder="email@email.com" }}}
+                      placeholder="your@email.com" }}}
                 </div>
               </li>
               {{{ InputError error="${errors.email}"}}}
@@ -205,7 +228,7 @@ export class ProfileChange extends Block {
                       ref="login"
                       onBlur=blur
                       type="text"
-                      placeholder="vladlogin" }}}
+                      placeholder="login" }}}
                 </div>
               </li>
               {{{ InputError error="${errors.login}"}}}
@@ -219,7 +242,7 @@ export class ProfileChange extends Block {
                       ref="first_name"
                       onBlur=blur
                       type="text"
-                      placeholder="Vlad" }}}
+                      placeholder="Name" }}}
                 </div>
               </li>
               {{{ InputError error="${errors.first_name}"}}}
@@ -233,20 +256,24 @@ export class ProfileChange extends Block {
                       ref="second_name"
                       onBlur=blur
                       type="text"
-                      placeholder="Vladov" }}}
+                      placeholder="Surname" }}}
                 </div>
               </li>
               {{{ InputError error="${errors.second_name}"}}}
               <hr>
 
-              <li class="info-field"> 
-                <div>
-                  <p>Display Name</p>
-                  {{{ Input class="value"
-                      placeholder="VladVladov" }}}
-                </div>
+              <li class="info-field">
+              <div>
+                <p>Display Name</p>
+                {{{ Input class="value" 
+                    value="${values.display_name}"
+                    ref="display_name"
+                    onBlur=blur
+                    type="text"
+                    placeholder="NameSurname" }}}
+              </div>
               </li>
-              {{{ InputError }}}
+              {{{ InputError error="${errors.display_name}"}}}
               <hr>
 
               <li class="info-field">
@@ -257,7 +284,7 @@ export class ProfileChange extends Block {
                       ref="phone"
                       onBlur=blur
                       type="tel"
-                      placeholder="+7 (777) 777 77 77" }}}
+                      placeholder="+7-(911)-911-9111" }}}
                 </div>
               </li>
               {{{ InputError error="${errors.phone}"}}}
@@ -274,3 +301,5 @@ export class ProfileChange extends Block {
     `;
   }
 }
+
+export default withRouter(withStore(ProfileChangePage))

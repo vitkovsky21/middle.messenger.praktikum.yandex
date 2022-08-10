@@ -1,82 +1,134 @@
-import { renderDOM } from '../../core';
+import { UserDTO } from '../../api/types';
+import { BrowseRouter, renderDOM, Store } from '../../core';
 import Block from '../../core/Block';
-import Chat from '../chat';
-import LoginPage from '../loginPage';
-import ProfileChange from '../profileChange';
-import ProfilePassword from '../profilePassword';
+import { logout } from '../../services/auth';
+import { changeAvatar } from '../../services/changeData';
+import { withRouter, withStore } from '../../utils';
 
-export class ProfilePage extends Block {
+type ProfilePageProps = {
+  router: BrowseRouter;
+  store: Store<AppState>;
+  avatar: () => string;
+  email: UserDTO;
+  login: UserDTO;
+  firstName: UserDTO;
+  secondName: UserDTO;
+  displayName: UserDTO;
+  phone: UserDTO;
+};
+
+export class ProfilePage extends Block<ProfilePageProps> {
+  constructor(props: ProfilePageProps) {
+    super(props);
+
+    this.setProps({
+      avatar: () => this.props.store.getState().user?.avatar,
+    });
+  }
+
   protected getStateFromProps() {
     this.state = {
-      exit: () => {
-        renderDOM(new LoginPage({}));
+      values: {
+        file: '',
       },
-      toChat: () => {
-        renderDOM(new Chat({}));
+      exit: () => {
+        this.props.store.dispatch(logout);
+      },
+      back: () => {
+        this.props.router.go('/chat')
       },
       profileChange: () => {
-        renderDOM(new ProfileChange({}));
+        this.props.router.go('/settings')
       },
       profilePassword: () => {
-        renderDOM(new ProfilePassword({}));
+        this.props.router.go('/password')
       },
+      changeAvatar: () => {
+        const file = document.getElementById("file") as HTMLInputElement;
+        
+        if (file.files) {
+            const formData = new FormData();
+
+            formData.append("avatar", file.files[0]);
+
+            console.log([...formData])
+            console.log(file.files[0])
+
+            this.props.store.dispatch(changeAvatar, formData);
+            console.log(this.props.store.getState().user?.avatar)
+        }
+      }
     };
   }
 
   render() {
+    const { values } = this.state;
     return `
         <div class="wrapper">
           <div class="sidebar">
-              {{{Link onClick=toChat }}}
+              {{{Link onClick=back }}}
           </div>
 
           <div class="profile-main">
             <a>
               <div class="circle">
-                <div class="picture"></div>
-                <p>Change avatar</p>
+
+                {{#if store.state.user.avatar}}
+                  <img src={{avatar}} alt="#">
+                  <label class="avatar-label" for="file"><p>Change avatar</p></label>
+                  <input value="${values.file}" name="file" ref="file" type="file" id="file" name="file">
+                  <div class="avatar-label">
+                    {{{ Button class="avatar-label" type="submit" onClick=changeAvatar text="Upload" }}}
+                  </div>
+                {{else}}
+                  <div class="picture"></div>
+                  <label class="picture-label" for="file"><p>Change avatar</p></label>
+                  <input value="${values.file}" name="file" ref="file" type="file" id="file" name="file">
+                  {{{ Button type="submit" onClick=changeAvatar text="Upload" }}}
+                {{/if}}
+
+
               </div>
             </a>
 
-            <h4>Name</h4>
             <ul class="info">
-              <li class="info-field"> 
-                <p>Email </p>
-                <p class="value">email@email.com</p>
-              </li>
-              <hr>
-              <li class="info-field">
-                <p>Login </p>
-                <p class="value">vladlogin</p>
-              </li>
-              <hr>
-              <li class="info-field"> 
-                <p>First Name</p>
-                <p class="value">Vlad </p>
-              </li>
-              <hr>
-              <li class="info-field">
-                <p>Second Name </p>
-                <p class="value">Vladov</p>
-              </li>
-              <hr>
-              <li class="info-field"> 
-                <p>Display Name </p>
-                <p class="value">VladVladov</p>
-              </li>
-              <hr>
-              <li class="info-field">
-                <p>Phone </p>
-                <p class="value">+7 (777) 777 77 77</p>
-              </li>
-            </ul>
+            <li class="info-field"> 
+              <p>Email</p>
+              <p class="value">${this.props.store.getState().user?.email}</p>
+            </li>
+            <hr>
+            <li class="info-field">
+              <p>Login</p>
+              <p class="value">${this.props.store.getState().user?.login}</p>
+            </li>
+            <hr>
+            <li class="info-field"> 
+              <p>First Name</p>
+              <p class="value">${this.props.store.getState().user?.firstName}</p>
+            </li>
+            <hr>
+            <li class="info-field">
+              <p>Second Name</p>
+              <p class="value">${this.props.store.getState().user?.secondName}</p>
+            </li>
+            <hr>
+            <li class="info-field"> 
+              <p>Display Name</p>
+              <p class="value">${this.props.store.getState().user?.displayName}</p>
+            </li>
+            <hr>
+            <li class="info-field">
+              <p>Phone</p>
+              <p class="value">${this.props.store.getState().user?.phone}</p>
+            </li>
+          </ul>
 
             <div class="links">
               {{{ Link onClick=profileChange text="Change data" }}}
               <hr>
               {{{ Link onClick=profilePassword text="Change password" }}}
               <hr>
-              {{{ Link onClick=exit text="Exit" }}}
+              {{{ Link onClick=exit text="Logout" }}}
             </div>
 
           </div>
@@ -84,3 +136,5 @@ export class ProfilePage extends Block {
     `;
   }
 }
+
+export default withRouter(withStore(ProfilePage))

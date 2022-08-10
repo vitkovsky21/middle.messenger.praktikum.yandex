@@ -1,9 +1,16 @@
-import { renderDOM } from '../../core';
+import { BrowseRouter, Store } from '../../core';
 import Block from '../../core/Block';
-import Chat from '../chat';
-import LoginPage from '../loginPage';
+import { signUp } from '../../services/auth';
+import { initChat } from '../../services/initApp';
+import { withRouter, withStore } from '../../utils';
 
-export class SignUpPage extends Block {
+type SignUpProps = {
+  router: BrowseRouter;
+  store: Store<AppState>;
+};
+
+export class SignUpPage extends Block<SignUpProps> {
+
   protected getStateFromProps() {
     this.state = {
       values: {
@@ -101,13 +108,14 @@ export class SignUpPage extends Block {
             && !nextState.errors.first_name
             && !nextState.errors.second_name
             && !nextState.errors.phone) {
-          renderDOM(new Chat({}));
+          this.props.store.dispatch(signUp, signUpData)
+          this.props.store.dispatch(initChat)
         }
 
         console.log('action/signUp', signUpData);
       },
       signIn: () => {
-        renderDOM(new LoginPage({}));
+        this.props.router.go("/login");
       },
       blur: () => {
         const signUpData = {
@@ -267,3 +275,5 @@ export class SignUpPage extends Block {
     `;
   }
 }
+
+export default withRouter(withStore(SignUpPage))

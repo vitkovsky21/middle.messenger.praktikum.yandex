@@ -1,9 +1,29 @@
-import { renderDOM } from '../../core';
 import Block from '../../core/Block';
-import Chat from '../chat';
-import SignUpPage from '../signUpPage';
+import { BrowseRouter, HashRouter } from '../../core';
+import { Store } from '../../core';
+import { login } from '../../services/auth';
+import { withRouter, withStore } from '../../utils';
+import { initChat } from '../../services/initApp';
 
-export class LoginPage extends Block {
+type LoginPageProps = {
+  router: BrowseRouter;
+  store: Store<AppState>;
+};
+
+export class LoginPage extends Block<LoginPageProps> {
+  constructor(props: LoginPageProps) {
+    super(props);
+  }  
+
+  componentDidMount() {
+    setTimeout(() => {
+      if (this.props.store.getState().user) {
+        console.log(this.props.store.getState().user)
+        this.props.router.go('/chat');
+      }
+    }, 1500)
+  }
+
   protected getStateFromProps() {
     this.state = {
       values: {
@@ -15,6 +35,7 @@ export class LoginPage extends Block {
         password: '',
       },
       login: () => {
+        let isError = false;
         const loginData = {
           login: (this.refs.login as HTMLInputElement).value,
           password: (this.refs.password as HTMLInputElement).value,
@@ -32,29 +53,32 @@ export class LoginPage extends Block {
         const passwordValidate = /^(?=.*\d)(?=.*[A-Z])\w{8,40}$/i.test(loginData.password);
 
         if (!loginData.login) {
+          isError = true;
           nextState.errors.login = 'Login is required';
         } else if (loginData.login.length < 4) {
+          isError = true;
           nextState.errors.login = 'Login should contain more than 3 chars';
         } else if (!loginValidate) {
+          isError = true;
           nextState.errors.login = 'Invalid login';
         }
 
         if (!loginData.password) {
+          isError = true;
           nextState.errors.password = 'Password is required';
         } else if (!passwordValidate) {
+          isError = true;
           nextState.errors.password = 'Invalid password';
         }
 
         this.setState(nextState);
 
-        console.log('action/login', loginData);
-
-        if (!nextState.errors.login && !nextState.errors.password) {
-          renderDOM(new Chat({}));
+        if (!isError) {
+          this.props.store.dispatch(login, loginData);
         }
       },
       signUp: () => {
-        renderDOM(new SignUpPage({}));
+        this.props.router.go('/signUp')
       },
       blur: () => {
         const loginData = {
@@ -125,7 +149,7 @@ export class LoginPage extends Block {
           </div>
 
           <div class="buttons">
-            {{{ Button class="btn" onClick=login text="Enter" }}}
+            {{{ Button class="btn" onClick=login  text="Enter" }}}
             {{{ Link class="btn link" onClick=signUp to="signUpPage" text="Sign Up" }}}
           </div>
           
@@ -134,3 +158,5 @@ export class LoginPage extends Block {
     `;
   }
 }
+
+export default withRouter(withStore(LoginPage))

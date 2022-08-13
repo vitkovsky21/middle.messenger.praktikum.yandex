@@ -1,12 +1,11 @@
-import { renderDOM } from '../../core';
 import Block from '../../core/Block';
-import Chat from '../chat';
+import { withRouter, withStore } from '../../utils';
 
-export class errorExist extends Block {
+export class ErrorExist extends Block {
   protected getStateFromProps() {
     this.state = {
       toChat: () => {
-        renderDOM(new Chat({}));
+        window.router.go('/')
       },
     };
   }
@@ -16,8 +15,10 @@ export class errorExist extends Block {
         <div class="errors">
           <h2 class="heading">404</h2>
           <p>This page doesn't exist.</p>
-          {{{ Link class="btn link" onClick=toChat text="Back to chat." }}}
+          {{{ Link class="btn link" onClick=toChat text="Back to login page." }}}
         </div>
     `;
   }
 }
+
+export default withRouter(withStore(ErrorExist))

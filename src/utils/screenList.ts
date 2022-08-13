@@ -1,4 +1,5 @@
 import { BlockClass } from '../core';
+import ErrorExist from '../pages/404';
 import Chat from '../pages/chat';
 import LoginPage from '../pages/loginPage';
 import ProfileChangePage from '../pages/profileChange';
@@ -12,7 +13,8 @@ export enum Screens {
   SignUpPage = 'signUp',
   ProfilePage = 'profilePage',
   ProfileChangePage = 'settings',
-  ProfilePassword = 'password'
+  ProfilePassword = 'password',
+  ErrorExist = '404'
 }
 
 const map: Record<Screens, BlockClass<any>> = {
@@ -21,7 +23,8 @@ const map: Record<Screens, BlockClass<any>> = {
   [Screens.SignUpPage]: SignUpPage,
   [Screens.ProfilePage]: ProfilePage,
   [Screens.ProfileChangePage]: ProfileChangePage,
-  [Screens.ProfilePassword]: profilePassword
+  [Screens.ProfilePassword]: profilePassword,
+  [Screens.ErrorExist]: ErrorExist
 };
 
 export const getScreenComponent = (screen: Screens): BlockClass<any> => {

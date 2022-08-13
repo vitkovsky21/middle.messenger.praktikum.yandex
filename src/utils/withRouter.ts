@@ -1,5 +1,4 @@
 import { BlockClass, BrowseRouter } from '../core';
-import { HashRouter } from '../core/HashRouter';
 
 type WithRouterProps = { router: BrowseRouter }
 

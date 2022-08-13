@@ -28,6 +28,7 @@ class Route <P = any>{
     leave() {
         if (this.#block) {
             this.#block.hide();
+            this.#block = null;
         }
     }
     match(pathname: string) {
@@ -61,11 +62,16 @@ export default class BrowseRouter {
     #routers: Array<Route> = [];
     #history: History = window.history;
     #currentRoute: Route | null = null;
+    
+    private _callback: () => void;
 
     constructor() {
+        
+        
         if (BrowseRouter.__instance) {
             return BrowseRouter.__instance;
         }
+        this._callback = () => {};
 
         BrowseRouter.__instance = this;
     }
@@ -98,6 +104,15 @@ export default class BrowseRouter {
 
         this.#currentRoute = route;
         route.render();
+    }
+
+    public onRoute(callback: () => void) {
+        this._callback = callback;
+        return this;
+    }
+
+    get currentRoute() {
+        return this.#currentRoute;
     }
 
     go(pathname: string) {

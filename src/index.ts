@@ -66,11 +66,13 @@ document.addEventListener('DOMContentLoaded', () => {
     .use('/profilePage', getScreenComponent(Screens.ProfilePage))
     .use('/settings', getScreenComponent(Screens.ProfileChangePage))
     .use('/password', getScreenComponent(Screens.ProfilePassword))
+    .use('/error', getScreenComponent(Screens.ErrorExist))
     .use('/', getScreenComponent(Screens.Login))
-    .use('*', getScreenComponent(Screens.Login))
+    .use('*', getScreenComponent(Screens.ErrorExist))
     .start()
     
   setTimeout(() => {
+      console.log('222')
       store.dispatch(initApp);
   }, 100);
 });

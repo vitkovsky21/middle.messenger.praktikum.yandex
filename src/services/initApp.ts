@@ -12,6 +12,7 @@ export async function initApp(dispatch: Dispatch<AppState>) {
     const response = await authAPI.me();
 
     if (apiHasError(response)) {
+      window.router.go("/error");
       return;
     }
 
@@ -33,7 +34,7 @@ export async function initChat(dispatch: Dispatch<AppState>) {
       return;
     }
 
-    dispatch({ chat: transformChat(response as ChatAPI) });
+    dispatch({ chat: transformChat(response as ChatAPI[]) });
   } catch (err) {
     console.error(err);
   } finally {

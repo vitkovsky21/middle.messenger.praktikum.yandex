@@ -232,10 +232,10 @@ export const openChat = async (
   socket.addEventListener('open', () => {
     console.log('Соединение установлено');
   
-    // socket.send(JSON.stringify({
-    //   content: 'Моё первое сообщение миру!',
-    //   type: 'message',
-    // }));
+    socket.send(JSON.stringify({
+      content: 'Hello!',
+      type: 'message',
+    }));
   });
 
   socket.addEventListener('close', event => {

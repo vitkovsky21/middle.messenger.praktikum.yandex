@@ -1,4 +1,6 @@
-import { renderDOM, registerComponent, HashRouter, BrowseRouter } from './core'
+import {
+  renderDOM, registerComponent, HashRouter, BrowseRouter,
+} from './core';
 import { Store } from './core/Store';
 import { defaultState } from './store';
 import { initApp, initChat } from './services/initApp';
@@ -41,7 +43,6 @@ document.addEventListener('DOMContentLoaded', () => {
       );
       console.log(JSON.stringify(diffObjectsDeep.map(prevState, nextState)));
     }
-    
 
     if (prevState.screen !== nextState.screen) {
       const Page = getScreenComponent(nextState.screen);
@@ -69,10 +70,10 @@ document.addEventListener('DOMContentLoaded', () => {
     .use('/error', getScreenComponent(Screens.ErrorExist))
     .use('/', getScreenComponent(Screens.Login))
     .use('*', getScreenComponent(Screens.ErrorExist))
-    .start()
-    
+    .start();
+
   setTimeout(() => {
-      console.log('222')
-      store.dispatch(initApp);
+    console.log('222');
+    store.dispatch(initApp);
   }, 100);
 });

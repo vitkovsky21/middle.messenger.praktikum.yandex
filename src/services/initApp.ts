@@ -12,7 +12,7 @@ export async function initApp(dispatch: Dispatch<AppState>) {
     const response = await authAPI.me();
 
     if (apiHasError(response)) {
-      window.router.go("/error");
+      window.router.go('/error');
       return;
     }
 

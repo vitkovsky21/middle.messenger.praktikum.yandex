@@ -11,9 +11,13 @@ interface ChatProps {
   onConnectChat: () => (ChatListId: ChatInfo) => void;
 }
 
-export class Chat extends Block{
-  constructor({ chatListId, title, messageContent, id, time, onClick }: ChatProps) {
-    super({ chatListId, title, messageContent, id, time, events: { click: onClick } });
+export class Chat extends Block {
+  constructor({
+    chatListId, title, messageContent, id, time, onClick,
+  }: ChatProps) {
+    super({
+      chatListId, title, messageContent, id, time, events: { click: onClick },
+    });
   }
 
   protected render(): string {

@@ -1,6 +1,6 @@
 export { mergeDeep } from './mergeDeep';
 export { diffObjectsDeep } from './diffObjectsDeep';
-export { default as HTTPTransport } from "./../core/requestApi";
+export { default as HTTPTransport } from '../core/requestApi';
 export { withStore } from './withStore';
 export { withRouter } from './withRouter';
 export { withIsLoading } from './withIsLoading';

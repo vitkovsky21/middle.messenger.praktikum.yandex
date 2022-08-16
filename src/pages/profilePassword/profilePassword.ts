@@ -18,7 +18,7 @@ export class ProfilePassword extends Block<PasswordProps> {
       avatar: () => this.props.store.getState().user?.avatar,
     });
   }
-  
+
   protected getStateFromProps() {
     this.state = {
       values: {
@@ -65,7 +65,7 @@ export class ProfilePassword extends Block<PasswordProps> {
         this.setState(nextState);
       },
       back: () => {
-        this.props.router.go("/profilePage");
+        this.props.router.go('/profilePage');
       },
       toProfile: () => {
         const passwordData = {
@@ -167,4 +167,4 @@ export class ProfilePassword extends Block<PasswordProps> {
   }
 }
 
-export default withRouter(withStore(ProfilePassword))
+export default withRouter(withStore(ProfilePassword));

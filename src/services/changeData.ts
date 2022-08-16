@@ -41,10 +41,9 @@ export const changeAvatar = async (
   state: AppState,
   action: ChangeAvatarPayload,
 ) => {
-
   const response = await dataAPI.changeAvatar(action);
 
-  console.log(response)
+  console.log(response);
 
   dispatch({ user: transformUser(response as UserDTO) });
 

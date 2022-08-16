@@ -1,4 +1,4 @@
-import { HTTPTransport } from "../utils";
+import { HTTPTransport } from '../utils';
 
 const host = 'https://ya-praktikum.tech/';
 
@@ -18,17 +18,12 @@ type AvatarData = {
   avatar: any;
 }
 
-type ChangeResponseData = {};
-
 export const dataAPI = {
-  addUserLogin: (data: LoginData) =>
-    new HTTPTransport().get(`${host}api/v2/user/${data}`),
+  addUserLogin: (data: LoginData) => new HTTPTransport().get(`${host}api/v2/user/${data}`),
 
-  changeData: (data: ChangeConfigData) =>
-    new HTTPTransport().put(`${host}api/v2/user/profile`, { data, headers: { "Content-Type": "application/json" } }), 
-  
-  changeAvatar: (data: AvatarData) =>
-    new HTTPTransport().put(`${host}/api/v2/user/profile/avatar`, { data }),
+  changeData: (data: ChangeConfigData) => new HTTPTransport().put(`${host}api/v2/user/profile`, { data, headers: { 'Content-Type': 'application/json' } }),
+
+  changeAvatar: (data: AvatarData) => new HTTPTransport().put(`${host}/api/v2/user/profile/avatar`, { data }),
 
   me: () => new HTTPTransport().get(`${host}api/v2/auth/user`),
 };

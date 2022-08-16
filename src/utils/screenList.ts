@@ -24,9 +24,7 @@ const map: Record<Screens, BlockClass<any>> = {
   [Screens.ProfilePage]: ProfilePage,
   [Screens.ProfileChangePage]: ProfileChangePage,
   [Screens.ProfilePassword]: profilePassword,
-  [Screens.ErrorExist]: ErrorExist
+  [Screens.ErrorExist]: ErrorExist,
 };
 
-export const getScreenComponent = (screen: Screens): BlockClass<any> => {
-  return map[screen];
-};
+export const getScreenComponent = (screen: Screens): BlockClass<any> => map[screen];

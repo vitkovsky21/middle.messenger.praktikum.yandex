@@ -1,6 +1,5 @@
 import Block from '../../core/Block';
-import { BrowseRouter, HashRouter } from '../../core';
-import { Store } from '../../core';
+import { BrowseRouter, HashRouter, Store } from '../../core';
 import { login } from '../../services/auth';
 import { withRouter, withStore } from '../../utils';
 import { initChat } from '../../services/initApp';
@@ -13,15 +12,15 @@ type LoginPageProps = {
 export class LoginPage extends Block<LoginPageProps> {
   constructor(props: LoginPageProps) {
     super(props);
-  }  
+  }
 
   componentDidMount() {
     setTimeout(() => {
       if (this.props.store.getState().user) {
-        console.log(this.props.store.getState().user)
+        console.log(this.props.store.getState().user);
         this.props.router.go('/chat');
       }
-    }, 1500)
+    }, 1500);
   }
 
   protected getStateFromProps() {
@@ -78,7 +77,7 @@ export class LoginPage extends Block<LoginPageProps> {
         }
       },
       signUp: () => {
-        this.props.router.go('/signUp')
+        this.props.router.go('/signUp');
       },
       blur: () => {
         const loginData = {
@@ -159,4 +158,4 @@ export class LoginPage extends Block<LoginPageProps> {
   }
 }
 
-export default withRouter(withStore(LoginPage))
+export default withRouter(withStore(LoginPage));

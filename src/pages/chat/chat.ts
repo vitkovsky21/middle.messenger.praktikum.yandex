@@ -1,9 +1,10 @@
 import { BrowseRouter, Store } from '../../core';
 import Block from '../../core/Block';
-import { addUser, createChat, getChats, getMessages, openChat, sendMessage } from '../../services/chats';
+import {
+  addUser, createChat, getChats, getMessages, openChat, sendMessage,
+} from '../../services/chats';
 import { withRouter, withStore } from '../../utils';
 import { initChat } from '../../services/initApp';
-
 
 type ChatProps = {
   router: BrowseRouter;
@@ -28,81 +29,77 @@ export class Chat extends Block<ChatProps> {
     const promise = Promise.resolve('success');
 
     promise
-      .then(() => {  
-        this.props.store.dispatch(initChat)
-        this.props.store.dispatch(getChats)
-      })
+      .then(() => {
+        this.props.store.dispatch(initChat);
+        this.props.store.dispatch(getChats);
+      });
 
     setTimeout(() => {
       if (!this.props.store.getState().chat) {
         this.props.router.go('/login');
       }
-    }, 1500)
+    }, 1500);
   }
 
   protected getStateFromProps() {
     this.state = {
       values: {
         message: '',
-        userid: ''
+        userid: '',
       },
       errors: {
         message: '',
       },
       chatList: {
-        title: ''
+        title: '',
       },
       connect: {
-        id: ''
+        id: '',
       },
       onConnectChat: (chat: ChatInfo) => {
-
-        let id = chat.path[0].id
-        let featuredChat = chat.path[0]
+        const { id } = chat.path[0];
+        const featuredChat = chat.path[0];
 
         const connectChatData = {
-          featuredId: id
-        }
+          featuredId: id,
+        };
 
         const nextState = {
-          values: {...connectChatData}
-        }
+          values: { ...connectChatData },
+        };
 
-        this.props.thisId = id
+        this.props.thisId = id;
         this.props.userId = this.props.store.getState().user.id;
-        
-        this.setState(nextState)
-        this.setProps({ selectedChat: featuredChat })
-        
+
+        this.setState(nextState);
+        this.setProps({ selectedChat: featuredChat });
+
         setTimeout(() => {
-          console.log("AUU")        
+          console.log('AUU');
           this.props.store.dispatch(openChat, { userId: this.props.store.getState().user.id, chatId: id });
-        }, 300)
+        }, 300);
         setTimeout(() => {
-          this.props.store.dispatch(getMessages, {id: this.props.selectedChat.id})
-        }, 1000)
+          this.props.store.dispatch(getMessages, { id: this.props.selectedChat.id });
+        }, 1000);
         setTimeout(() => {
-          let elements = document.getElementsByClassName('msg')
+          const elements = document.getElementsByClassName('msg');
           for (let i = 0; i < elements.length; i++) {
-            elements[i].classList.remove('loader') 
+            elements[i].classList.remove('loader');
           }
-          let msgArr: any = this.props.store.getState().messages
+          const msgArr: any = this.props.store.getState().messages;
           for (let i = 0; i < elements.length; i++) {
-            console.log(msgArr[i].user_id)
+            console.log(msgArr[i].user_id);
             if (msgArr[i].user_id == this.props.userId) {
-              elements[i].classList.add('your-message')
+              elements[i].classList.add('your-message');
             } else {
-              elements[i].classList.add('users-message')
+              elements[i].classList.add('users-message');
             }
           }
 
           setTimeout(() => {
-            document.getElementsByClassName("msg")[elements.length-1].scrollIntoView()
-          }, 100)
-          
-        }, 1300)   
-        
-
+            document.getElementsByClassName('msg')[elements.length - 1].scrollIntoView();
+          }, 100);
+        }, 1300);
       },
       toProfilePage: () => {
         console.log(this.props.store.getState().chat);
@@ -110,54 +107,51 @@ export class Chat extends Block<ChatProps> {
       },
       add: () => {
         const addUserData = {
-          userid: (this.refs.userid as HTMLInputElement).value
-        }
+          userid: (this.refs.userid as HTMLInputElement).value,
+        };
 
         const nextState = {
-          values: {...addUserData}
-        }
+          values: { ...addUserData },
+        };
 
-        let numUserId = Number(addUserData.userid)
-        addUser(numUserId, this.props.thisId)
+        const numUserId = Number(addUserData.userid);
+        addUser(numUserId, this.props.thisId);
 
         this.setState(nextState);
-        
       },
       createChat: () => {
         const createChatData = {
-          title: (this.refs.title as HTMLInputElement).value
+          title: (this.refs.title as HTMLInputElement).value,
         };
 
         const nextState = {
           errors: {
-            message: ''
+            message: '',
           },
           values: { ...createChatData },
         };
 
         this.setState(nextState);
-        this.props.store.dispatch(createChat, createChatData)
+        this.props.store.dispatch(createChat, createChatData);
 
         setTimeout(() => {
-          let elements = document.getElementsByClassName('msg')
-          let msgArr: any = this.props.store.getState().messages
+          const elements = document.getElementsByClassName('msg');
+          const msgArr: any = this.props.store.getState().messages;
 
-          for (let i in elements) {
+          for (const i in elements) {
             if (msgArr) {
               if (msgArr[i].user_id == this.props.userId) {
-                elements[i].classList.add('your-message')
+                elements[i].classList.add('your-message');
               } else {
-                elements[i].classList.add('users-message')
+                elements[i].classList.add('users-message');
               }
             }
           }
-        }, 1300)
-        
-        
-        setTimeout(() => { 
-          this.props.router.go("/chat")    
-        }, 1400)  
+        }, 1300);
 
+        setTimeout(() => {
+          this.props.router.go('/chat');
+        }, 1400);
       },
       send: () => {
         const chatData = {
@@ -169,47 +163,44 @@ export class Chat extends Block<ChatProps> {
         };
 
         this.setState(nextState);
-        this.props.store.dispatch(sendMessage, {id: this.props.selectedChat.id, msg: chatData.message})
+        this.props.store.dispatch(sendMessage, { id: this.props.selectedChat.id, msg: chatData.message });
 
         const promise = Promise.resolve('success');
 
         promise
-          .then(() => {          
-    
+          .then(() => {
             if (!this.props.messages) {
-              this.props.messages = [this.props.store.getState().message]
+              this.props.messages = [this.props.store.getState().message];
             }
-  
+
             this.setState(nextState);
 
-            this.props.store.dispatch(getMessages, {id: this.props.selectedChat.id, msg: chatData.message})
+            this.props.store.dispatch(getMessages, { id: this.props.selectedChat.id, msg: chatData.message });
             this.setState(nextState);
           })
-        .then(() => {
-          setTimeout(() => {
-            let elements = document.getElementsByClassName('msg')
-            for (let i = 0; i < elements.length; i++) {
-              elements[i].classList.remove('loader') 
-            }
-            
-            let msgArr: any = this.props.store.getState().messages
-  
-            for (let i = 0; i < elements.length; i++) {
-              console.log(msgArr[i].user_id)
-              if (msgArr[i].user_id == this.props.userId) {
-                elements[i].classList.add('your-message')
-              } else {
-                elements[i].classList.add('users-message')
-              }
-            }
-
+          .then(() => {
             setTimeout(() => {
-              document.getElementsByClassName("msg")[elements.length-1].scrollIntoView()
-            }, 100)
-            
-          }, 1300)
-        })
-        
+              const elements = document.getElementsByClassName('msg');
+              for (let i = 0; i < elements.length; i++) {
+                elements[i].classList.remove('loader');
+              }
+
+              const msgArr: any = this.props.store.getState().messages;
+
+              for (let i = 0; i < elements.length; i++) {
+                console.log(msgArr[i].user_id);
+                if (msgArr[i].user_id == this.props.userId) {
+                  elements[i].classList.add('your-message');
+                } else {
+                  elements[i].classList.add('users-message');
+                }
+              }
+
+              setTimeout(() => {
+                document.getElementsByClassName('msg')[elements.length - 1].scrollIntoView();
+              }, 100);
+            }, 1300);
+          });
       },
     };
   }
@@ -282,4 +273,4 @@ export class Chat extends Block<ChatProps> {
   }
 }
 
-export default withRouter(withStore(Chat))
+export default withRouter(withStore(Chat));

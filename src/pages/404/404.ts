@@ -5,7 +5,7 @@ export class ErrorExist extends Block {
   protected getStateFromProps() {
     this.state = {
       toChat: () => {
-        window.router.go('/')
+        window.router.go('/');
       },
     };
   }
@@ -21,4 +21,4 @@ export class ErrorExist extends Block {
   }
 }
 
-export default withRouter(withStore(ErrorExist))
+export default withRouter(withStore(ErrorExist));

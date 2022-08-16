@@ -45,7 +45,6 @@ export const login = async (
   window.router.go('/chat');
 };
 
-
 export const logout = async (dispatch: Dispatch<AppState>) => {
   dispatch({ isLoading: true });
 
@@ -53,10 +52,8 @@ export const logout = async (dispatch: Dispatch<AppState>) => {
 
   dispatch({ isLoading: false, user: null });
 
-  window.router.go("/login");
+  window.router.go('/login');
 };
-
-
 
 export const signUp = async (
   dispatch: Dispatch<AppState>,

@@ -10,7 +10,6 @@ type SignUpProps = {
 };
 
 export class SignUpPage extends Block<SignUpProps> {
-
   protected getStateFromProps() {
     this.state = {
       values: {
@@ -108,14 +107,14 @@ export class SignUpPage extends Block<SignUpProps> {
             && !nextState.errors.first_name
             && !nextState.errors.second_name
             && !nextState.errors.phone) {
-          this.props.store.dispatch(signUp, signUpData)
-          this.props.store.dispatch(initChat)
+          this.props.store.dispatch(signUp, signUpData);
+          this.props.store.dispatch(initChat);
         }
 
         console.log('action/signUp', signUpData);
       },
       signIn: () => {
-        this.props.router.go("/login");
+        this.props.router.go('/login');
       },
       blur: () => {
         const signUpData = {
@@ -276,4 +275,4 @@ export class SignUpPage extends Block<SignUpProps> {
   }
 }
 
-export default withRouter(withStore(SignUpPage))
+export default withRouter(withStore(SignUpPage));

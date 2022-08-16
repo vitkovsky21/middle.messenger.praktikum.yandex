@@ -35,29 +35,29 @@ export class ProfilePage extends Block<ProfilePageProps> {
         this.props.store.dispatch(logout);
       },
       back: () => {
-        this.props.router.go('/chat')
+        this.props.router.go('/chat');
       },
       profileChange: () => {
-        this.props.router.go('/settings')
+        this.props.router.go('/settings');
       },
       profilePassword: () => {
-        this.props.router.go('/password')
+        this.props.router.go('/password');
       },
       changeAvatar: () => {
-        const file = document.getElementById("file") as HTMLInputElement;
-        
+        const file = document.getElementById('file') as HTMLInputElement;
+
         if (file.files) {
-            const formData = new FormData();
+          const formData = new FormData();
 
-            formData.append("avatar", file.files[0]);
+          formData.append('avatar', file.files[0]);
 
-            console.log([...formData])
-            console.log(file.files[0])
+          console.log([...formData]);
+          console.log(file.files[0]);
 
-            this.props.store.dispatch(changeAvatar, formData);
-            console.log(this.props.store.getState().user?.avatar)
+          this.props.store.dispatch(changeAvatar, formData);
+          console.log(this.props.store.getState().user?.avatar);
         }
-      }
+      },
     };
   }
 
@@ -137,4 +137,4 @@ export class ProfilePage extends Block<ProfilePageProps> {
   }
 }
 
-export default withRouter(withStore(ProfilePage))
+export default withRouter(withStore(ProfilePage));

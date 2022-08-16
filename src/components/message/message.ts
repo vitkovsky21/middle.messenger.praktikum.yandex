@@ -13,8 +13,8 @@ export class Message extends Block {
     super({ messages, message, events: { click: onClick } });
 
     this.setProps({
-      messages: () => this.props.store.getState().message
-    })
+      messages: () => this.props.store.getState().message,
+    });
   }
 
   render() {

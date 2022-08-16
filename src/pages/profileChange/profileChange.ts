@@ -37,7 +37,7 @@ export class ProfileChangePage extends Block<ProfileChangePageProps> {
         email: '',
       },
       back: () => {
-        this.props.router.go("/profilePage");
+        this.props.router.go('/profilePage');
       },
       blur: () => {
         const profileData = {
@@ -189,7 +189,7 @@ export class ProfileChangePage extends Block<ProfileChangePageProps> {
               && !nextState.errors.second_name
               && !nextState.errors.display_name
               && !nextState.errors.phone) {
-                this.props.store.dispatch(changeData, profileData);
+          this.props.store.dispatch(changeData, profileData);
         }
 
         console.log('action/profileChange', profileData);
@@ -315,4 +315,4 @@ export class ProfileChangePage extends Block<ProfileChangePageProps> {
   }
 }
 
-export default withRouter(withStore(ProfileChangePage))
+export default withRouter(withStore(ProfileChangePage));

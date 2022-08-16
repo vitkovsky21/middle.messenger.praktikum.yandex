@@ -1,4 +1,4 @@
-import { HTTPTransport } from "../utils";
+import { HTTPTransport } from '../utils';
 
 const host = 'https://ya-praktikum.tech/';
 
@@ -18,11 +18,9 @@ type SignUpRequestData = {
 
 export const authAPI = {
 
-  signUp: (data: SignUpRequestData): Promise<unknown> =>
-    new HTTPTransport().post(`${host}api/v2/auth/signup`, { data, headers: { "Content-Type": "application/json" } }), 
+  signUp: (data: SignUpRequestData): Promise<unknown> => new HTTPTransport().post(`${host}api/v2/auth/signup`, { data, headers: { 'Content-Type': 'application/json' } }),
 
-  login: (data: LoginRequestData): Promise<unknown> =>
-    new HTTPTransport().post(`${host}api/v2/auth/signin`, { data, headers: { "Content-Type": "application/json" } }),
+  login: (data: LoginRequestData): Promise<unknown> => new HTTPTransport().post(`${host}api/v2/auth/signin`, { data, headers: { 'Content-Type': 'application/json' } }),
 
   me: (): Promise<unknown> => new HTTPTransport().get(`${host}api/v2/auth/user`),
 

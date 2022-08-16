@@ -253,7 +253,7 @@ export class Chat extends Block<ChatProps> {
             {{#if store.state.values.userid}}
               {{{ Input class="field" value="${values.userid}" ref="userid" type="search" placeholder="Add user to chat" }}}
             {{else}}
-              {{{ Input class="field" value="" ref="userid" type="search" placeholder="Add user to chat" }}}
+              {{{ Input class="field" value="" ref="userid" type="search" placeholder="Add user to chat by ID" }}}
             {{/if}}
               {{{ Button text="Add >" onClick=add}}}
           </div>

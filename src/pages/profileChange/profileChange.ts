@@ -6,9 +6,18 @@ import { withRouter, withStore } from '../../utils';
 type ProfileChangePageProps = {
   router: BrowseRouter;
   store: Store<AppState>;
+  avatar: () => string;
 };
 
 export class ProfileChangePage extends Block<ProfileChangePageProps> {
+  constructor(props: ProfileChangePageProps) {
+    super(props);
+
+    this.setProps({
+      avatar: () => this.props.store.getState().user?.avatar,
+    });
+  }
+
   protected getStateFromProps() {
     this.state = {
       values: {
@@ -200,7 +209,11 @@ export class ProfileChangePage extends Block<ProfileChangePageProps> {
           <div class="profile-main">
             <a onClick=toChat>
               <div class="circle">
-                <div class="picture"></div>
+                {{#if store.state.user.avatar}}
+                  <img src={{avatar}} alt="#">
+                {{else}}
+                  <div class="picture"></div>
+                {{/if}}
               </div>
             </a>
 

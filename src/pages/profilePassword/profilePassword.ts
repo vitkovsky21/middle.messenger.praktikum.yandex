@@ -7,9 +7,18 @@ import { withRouter, withStore } from '../../utils';
 type PasswordProps = {
   router: BrowseRouter;
   store: Store<AppState>;
+  avatar: () => string;
 };
 
 export class ProfilePassword extends Block<PasswordProps> {
+  constructor(props: PasswordProps) {
+    super(props);
+
+    this.setProps({
+      avatar: () => this.props.store.getState().user?.avatar,
+    });
+  }
+  
   protected getStateFromProps() {
     this.state = {
       values: {
@@ -114,7 +123,11 @@ export class ProfilePassword extends Block<PasswordProps> {
           <div class="profile-main">
             <a onClick=toChat>
               <div class="circle">
-                <div class="picture"></div>
+                {{#if store.state.user.avatar}}
+                  <img src={{avatar}} alt="#">
+                {{else}}
+                  <div class="picture"></div>
+                {{/if}}
               </div>
             </a>
 

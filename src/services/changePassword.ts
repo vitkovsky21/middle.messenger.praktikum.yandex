@@ -26,5 +26,5 @@ export const changePassword = async (
 
   dispatch({ user: transformUser(responseUser as UserDTO) });
 
-  window.location.replace("/chat");
+  window.router.go("/chat");
 };

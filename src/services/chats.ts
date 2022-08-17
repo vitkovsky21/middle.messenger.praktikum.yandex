@@ -1,11 +1,5 @@
-import { authAPI } from '../api/auth';
-import { dataAPI } from '../api/changeData';
-import { chatsAPI } from '../api/chats';
-import { connectChatAPI } from '../api/connectChat';
-import {
-  ChatAPI, ChatListDTO, ConnectChatAPI, UserDTO, UserToAdd,
-} from '../api/types';
-import message from '../components/message';
+import chatsAPI from '../api/chats';
+import { ChatAPI, ChatListDTO } from '../api/types';
 import type { Dispatch } from '../core';
 import { apiHasError } from '../utils';
 import {
@@ -48,15 +42,16 @@ export const createChat = async (
   action: CreateChatPayload,
 ) => {
   dispatch({ isLoading: true });
+  const chats: chatsAPI = new chatsAPI();
 
-  const response = await chatsAPI.createChat(action);
+  const response = await chats.createChat(action);
 
   if (apiHasError(response)) {
     dispatch({ isLoading: false, loginFormError: response.reason });
     return;
   }
 
-  const responseUser = await chatsAPI.me();
+  const responseUser = await chats.me();
 
   console.log(responseUser);
 
@@ -65,8 +60,9 @@ export const createChat = async (
 
 export const getChats = async (dispatch: Dispatch<AppState>, state: AppState, payload: GetChatsPayload) => {
   dispatch({ isLoading: true });
+  const chats: chatsAPI = new chatsAPI();
 
-  const response = await chatsAPI.me();
+  const response = await chats.me();
 
   dispatch({ chatList: transformChatList(response as ChatListDTO[]) });
 };
@@ -196,7 +192,8 @@ export const getMessages = async (
 };
 
 export const addUser = async (userId: number, chatId: number) => {
-  await chatsAPI.addUserToChat({ users: [userId], chatId } as AddUsersData);
+  const chats: chatsAPI = new chatsAPI();
+  await chats.addUserToChat({ users: [userId], chatId } as AddUsersData);
 };
 
 export const openChat = async (
@@ -205,10 +202,11 @@ export const openChat = async (
   payload: ConnectChatPayload,
 ) => {
   let socket: WebSocket;
+  const chats: chatsAPI = new chatsAPI();
 
   userId = payload.userId;
 
-  const responseToken = await chatsAPI.getToken(payload.chatId);
+  const responseToken = await chats.getToken(payload.chatId);
   tkn = responseToken.token;
   const socketURL = `wss://ya-praktikum.tech/ws/chats/${payload.userId}/${payload.chatId}/${responseToken.token}`;
 

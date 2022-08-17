@@ -1,15 +1,14 @@
-import { HTTPTransport } from '../utils';
-
-const host = 'https://ya-praktikum.tech/';
+import Base from './Base';
+import { host } from './http';
 
 type ChangePasswordData = {
-  oldPassword: string;
-  newPassword: string;
+  old_password: string;
+  new_password: string;
 }
 
-export const dataAPI = {
-  changeData: (data: ChangePasswordData) => new HTTPTransport().put(`${host}api/v2/user/password`, { data, headers: { 'Content-Type': 'application/json' } }),
+export default class passwordAPI extends Base {
+  changeData(data: ChangePasswordData) { return this.base.put(`${host}api/v2/user/password`, { data, headers: { 'Content-Type': 'application/json' } })}
 
-  me: () => new HTTPTransport().get(`${host}api/v2/auth/user`),
+  me() {return this.base.get(`${host}api/v2/auth/user`)}
 
 };

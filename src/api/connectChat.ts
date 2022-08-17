@@ -1,6 +1,5 @@
 import { HTTPTransport } from '../utils';
-
-const host = 'https://ya-praktikum.tech/';
+import { host } from './http';
 
 type ConnectChatData = {
   id: number;

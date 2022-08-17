@@ -1,4 +1,5 @@
-import { authAPI } from '../api/auth';
+
+import authAPI from '../api/auth';
 import { UserDTO } from '../api/types';
 import type { Dispatch } from '../core';
 import { transformUser, apiHasError } from '../utils';
@@ -24,14 +25,16 @@ export const login = async (
 ) => {
   dispatch({ isLoading: true });
 
-  const response = await authAPI.login(action);
+  const auth: authAPI = new authAPI();
+
+  const response = await auth.login(action);
 
   if (apiHasError(response)) {
     dispatch({ isLoading: false, loginFormError: response.reason });
     return;
   }
 
-  const responseUser = await authAPI.me();
+  const responseUser = await auth.me();
 
   dispatch({ isLoading: false, loginFormError: null });
 
@@ -47,8 +50,9 @@ export const login = async (
 
 export const logout = async (dispatch: Dispatch<AppState>) => {
   dispatch({ isLoading: true });
+  const auth: authAPI = new authAPI();
 
-  await authAPI.logout();
+  await auth.logout();
 
   dispatch({ isLoading: false, user: null });
 
@@ -61,15 +65,16 @@ export const signUp = async (
   action: SignUpPayload,
 ) => {
   dispatch({ isLoading: true });
+  const auth: authAPI = new authAPI();
 
-  const response = await authAPI.signUp(action);
+  const response = await auth.signUp(action);
 
   if (apiHasError(response)) {
     dispatch({ isLoading: false, signUpFormError: response.reason });
     return;
   }
 
-  const responseUser = await authAPI.me();
+  const responseUser = await auth.me();
 
   dispatch({ isLoading: false, signUpFormError: null });
 

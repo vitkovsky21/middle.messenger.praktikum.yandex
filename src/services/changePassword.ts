@@ -1,11 +1,11 @@
-import { dataAPI } from '../api/changePassword';
+import passwordAPI from '../api/changePassword';
 import { UserDTO } from '../api/types';
 import type { Dispatch } from '../core';
 import { transformUser, apiHasError } from '../utils';
 
 type ChangePasswordPayload = {
-  oldPassword: string;
-  newPassword: string;
+  old_password: string;
+  new_password: string;
 };
 
 export const changePassword = async (
@@ -14,15 +14,16 @@ export const changePassword = async (
   action: ChangePasswordPayload,
 ) => {
   dispatch({ isLoading: true });
+  const pass: passwordAPI = new passwordAPI();
 
-  const response = await dataAPI.changeData(action);
+  const response = await pass.changeData(action);
 
   if (apiHasError(response)) {
     dispatch({ isLoading: false, loginFormError: response.reason });
     return;
   }
 
-  const responseUser = await dataAPI.me();
+  const responseUser = await pass.me();
 
   dispatch({ user: transformUser(responseUser as UserDTO) });
 

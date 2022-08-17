@@ -1,38 +1,41 @@
-const enum METHOD {
+const enum Method {
     GET = "GET",
     POST = "POST",
     PUT = "PUT",
     DELETE = "DELETE",
 }
 interface Options {
-    method?: METHOD;
+    method?: Method;
     data?: any;
     timeout?: number;
-    headers?: { [key: string]: string };
+     headers?: Record<string, string>;
 }
 
 export default class HTTPTransport {
 
     get = (url: string, options: Options = {}) => {
-        return this.request( url, { ...options, method: METHOD.GET });
+        return this.request( url, { ...options, method: Method.GET });
     };
 
     post = (url: string, options: Options = {}) => {
-        return this.request( url, { ...options, method: METHOD.POST }, options.timeout );
+        return this.request( url, { ...options, method: Method.POST }, options.timeout );
     };
 
     put = (url: string, options: Options = {}) => {
-        return this.request( url, { ...options, method: METHOD.PUT }, options.timeout );
+        return this.request( url, { ...options, method: Method.PUT }, options.timeout );
     };
 
     delete = (url: string, options: Options = {}) => {
-        return this.request( url, { ...options, method: METHOD.DELETE }, options.timeout );
+        return this.request( url, { ...options, method: Method.DELETE }, options.timeout );
     };
 
     request = (url: string, options: Options = {}, timeout = 3000) => {
         const { method, data, headers = {} } = options;
 
         return new Promise((resolve, reject) => {
+            if (!method) {
+                return;
+            }
             const xhr = new XMLHttpRequest();
             xhr.responseType = "json";
 
@@ -54,7 +57,7 @@ export default class HTTPTransport {
 
             xhr.withCredentials = true;
             
-            if (method === METHOD.GET || !data) {
+            if (method === Method.GET || !data) {
                 xhr.send();
             } else {
                 if (data instanceof FormData) {

@@ -1,4 +1,4 @@
-import { dataAPI } from '../api/changeData';
+import dataAPI from '../api/changeData';
 import { UserDTO } from '../api/types';
 import type { Dispatch } from '../core';
 import { transformUser, apiHasError } from '../utils';
@@ -21,15 +21,16 @@ export const changeData = async (
   action: ChangeDataPayload,
 ) => {
   dispatch({ isLoading: true });
+  const data: dataAPI = new dataAPI();
 
-  const response = await dataAPI.changeData(action);
+  const response = await data.changeData(action);
 
   if (apiHasError(response)) {
     dispatch({ isLoading: false, loginFormError: response.reason });
     return;
   }
 
-  const responseUser = await dataAPI.me();
+  const responseUser = await data.me();
 
   dispatch({ user: transformUser(responseUser as UserDTO) });
 
@@ -41,7 +42,8 @@ export const changeAvatar = async (
   state: AppState,
   action: ChangeAvatarPayload,
 ) => {
-  const response = await dataAPI.changeAvatar(action);
+  const data: dataAPI = new dataAPI();
+  const response = await data.changeAvatar(action);
 
   console.log(response);
 

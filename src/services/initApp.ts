@@ -1,5 +1,5 @@
-import { authAPI } from '../api/auth';
-import { chatsAPI } from '../api/chats';
+import authAPI from '../api/auth';
+import chatsAPI from '../api/chats';
 import { ChatAPI, UserDTO } from '../api/types';
 import type { Dispatch } from '../core';
 import { transformUser, apiHasError } from '../utils';
@@ -9,10 +9,11 @@ export async function initApp(dispatch: Dispatch<AppState>) {
   dispatch({ isLoading: true });
 
   try {
-    const response = await authAPI.me();
+    const auth: authAPI = new authAPI();
+    const response = await auth.me();
 
     if (apiHasError(response)) {
-      window.router.go('/error');
+      window.router.go('/');
       return;
     }
 
@@ -28,7 +29,8 @@ export async function initChat(dispatch: Dispatch<AppState>) {
   dispatch({ isLoading: true });
 
   try {
-    const response = await chatsAPI.me();
+    const chats: chatsAPI = new chatsAPI();
+    const response = await chats.me();
 
     if (apiHasError(response)) {
       return;

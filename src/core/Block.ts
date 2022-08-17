@@ -9,7 +9,7 @@ export interface BlockClass<P> extends Function {
   componentName?: string;
 }
 
-export default class Block<P = any> {
+export default class Block<P extends {}> {
   static EVENTS = {
     INIT: 'init',
     FLOW_CDM: 'flow:component-did-mount',
@@ -61,7 +61,7 @@ export default class Block<P = any> {
     this.eventBus().emit(Block.EVENTS.FLOW_CWU, this.props);
   }
 
-  _registerEvents(eventBus: EventBus<Events>) {
+  private _registerEvents(eventBus: EventBus<Events>) {
     eventBus.on(Block.EVENTS.INIT, this.init.bind(this));
     eventBus.on(Block.EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
     eventBus.on(Block.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));
@@ -69,7 +69,7 @@ export default class Block<P = any> {
     eventBus.on(Block.EVENTS.FLOW_RENDER, this._render.bind(this));
   }
 
-  _createResources() {
+  private _createResources() {
     this._element = this._createDocumentElement('div');
   }
 
@@ -82,22 +82,22 @@ export default class Block<P = any> {
     this.eventBus().emit(Block.EVENTS.FLOW_RENDER, this.props);
   }
 
-  _componentDidMount(props: P) {
+  private _componentDidMount(props: P) {
     this._checkInDom();
 
     this.componentDidMount(props);
   }
 
-  componentDidMount(props: P) {}
+  protected componentDidMount(props: P) {}
 
-  _componentWillUnmount() {
+  private _componentWillUnmount() {
     this.eventBus().destroy();
     this.componentWillUnmount();
   }
 
-  componentWillUnmount() {}
+  protected componentWillUnmount() {}
 
-  _componentDidUpdate(oldProps: P, newProps: P) {
+  private _componentDidUpdate(oldProps: P, newProps: P) {
     const response = this.componentDidUpdate(oldProps, newProps);
     if (!response) {
       return;

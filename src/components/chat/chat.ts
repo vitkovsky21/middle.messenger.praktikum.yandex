@@ -2,11 +2,10 @@ import Block from '../../core/Block';
 
 interface ChatProps {
   chatListId: ChatInfo;
-  title: any;
-  id: any;
-  messageContent: any;
+  title: string;
+  id: number;
+  messageContent: string;
   time: any;
-  chat: any;
   onClick: () => void;
   onConnectChat: () => (ChatListId: ChatInfo) => void;
 }

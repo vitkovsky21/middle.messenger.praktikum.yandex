@@ -1,87 +1,112 @@
-import { renderDOM } from '../../core';
+import { dataAPI } from '../../api/changePassword';
+import { BrowseRouter, Store } from '../../core';
 import Block from '../../core/Block';
-import Chat from '../chat';
-import ProfilePage from '../profilePage';
+import { changePassword } from '../../services/changePassword';
+import { withRouter, withStore } from '../../utils';
 
-export class ProfilePassword extends Block {
+type PasswordProps = {
+  router: BrowseRouter;
+  store: Store<AppState>;
+  avatar: () => string;
+};
+
+export class ProfilePassword extends Block<PasswordProps> {
+  constructor(props: PasswordProps) {
+    super(props);
+
+    this.setProps({
+      avatar: () => this.props.store.getState().user?.avatar,
+    });
+  }
+
   protected getStateFromProps() {
     this.state = {
       values: {
-        password: '',
-        repeat: '',
+        oldPassword: '',
+        newPassword: '',
       },
       errors: {
-        password: '',
-        repeat: '',
+        oldPassword: '',
+        newPassword: '',
       },
       blur: () => {
-        const profileData = {
-          password: (this.refs.password as HTMLInputElement).value,
-          repeat: (this.refs.repeat as HTMLInputElement).value,
+        const passwordData = {
+          oldPassword: (this.refs.oldPassword as HTMLInputElement).value,
+          newPassword: (this.refs.newPassword as HTMLInputElement).value,
         };
 
         const nextState = {
           errors: {
-            password: '',
-            repeat: '',
+            oldPassword: '',
+            newPassword: '',
           },
-          values: { ...profileData },
+          values: { ...passwordData },
         };
 
-        const passwordValidate = /^(?=.*\d)(?=.*[A-Z])\w{8,40}$/i.test(profileData.password);
+        const oldPasswordValidate = /^(?=.*\d)(?=.*[A-Z])\w{8,40}$/i.test(passwordData.oldPassword);
+        const newPasswordValidate = /^(?=.*\d)(?=.*[A-Z])\w{8,40}$/i.test(passwordData.newPassword);
 
-        if (!profileData.password) {
-          nextState.errors.password = 'Password is required';
-        } else if (profileData.password.length < 8) {
-          nextState.errors.password = 'Password should contain more than 8 chars';
-        } else if (!passwordValidate) {
-          nextState.errors.password = 'Invalid password';
+        if (!passwordData.oldPassword) {
+          nextState.errors.oldPassword = 'Password is required';
+        } else if (passwordData.oldPassword.length < 8) {
+          nextState.errors.oldPassword = 'Password should contain more than 8 chars';
+        } else if (!oldPasswordValidate) {
+          nextState.errors.oldPassword = 'Invalid password';
         }
 
-        if (profileData.repeat !== profileData.password || !profileData.repeat) {
-          nextState.errors.repeat = 'Repeat the password';
+        if (!passwordData.newPassword) {
+          nextState.errors.newPassword = 'Password is required';
+        } else if (passwordData.newPassword.length < 8) {
+          nextState.errors.newPassword = 'Password should contain more than 8 chars';
+        } else if (!newPasswordValidate) {
+          nextState.errors.newPassword = 'Invalid password';
         }
 
         this.setState(nextState);
       },
-      toChat: () => {
-        renderDOM(new Chat({}));
+      back: () => {
+        this.props.router.go('/profilePage');
       },
       toProfile: () => {
-        const profileData = {
-          password: (this.refs.password as HTMLInputElement).value,
-          repeat: (this.refs.repeat as HTMLInputElement).value,
+        const passwordData = {
+          oldPassword: (this.refs.oldPassword as HTMLInputElement).value,
+          newPassword: (this.refs.newPassword as HTMLInputElement).value,
         };
 
         const nextState = {
           errors: {
-            password: '',
-            repeat: '',
+            oldPassword: '',
+            newPassword: '',
           },
-          values: { ...profileData },
+          values: { ...passwordData },
         };
 
-        const passwordValidate = /^(?=.*\d)(?=.*[A-Z])\w{8,40}$/i.test(profileData.password);
+        const oldPasswordValidate = /^(?=.*\d)(?=.*[A-Z])\w{8,40}$/i.test(passwordData.oldPassword);
+        const newPasswordValidate = /^(?=.*\d)(?=.*[A-Z])\w{8,40}$/i.test(passwordData.newPassword);
 
-        if (!profileData.password) {
-          nextState.errors.password = 'Password is required';
-        } else if (profileData.password.length < 8) {
-          nextState.errors.password = 'Password should contain more than 8 chars';
-        } else if (!passwordValidate) {
-          nextState.errors.password = 'Invalid password';
+        if (!passwordData.oldPassword) {
+          nextState.errors.oldPassword = 'Password is required';
+        } else if (passwordData.oldPassword.length < 8) {
+          nextState.errors.oldPassword = 'Password should contain more than 8 chars';
+        } else if (!oldPasswordValidate) {
+          nextState.errors.oldPassword = 'Invalid password';
         }
 
-        if (profileData.repeat !== profileData.password || !profileData.repeat) {
-          nextState.errors.repeat = 'Repeat the password';
+        if (!passwordData.newPassword) {
+          nextState.errors.newPassword = 'Password is required';
+        } else if (passwordData.newPassword.length < 8) {
+          nextState.errors.newPassword = 'Password should contain more than 8 chars';
+        } else if (!newPasswordValidate) {
+          nextState.errors.newPassword = 'Invalid password';
         }
 
         this.setState(nextState);
 
-        if (!nextState.errors.password && !nextState.errors.repeat) {
-          renderDOM(new ProfilePage({}));
+        if (!nextState.errors.oldPassword && !nextState.errors.newPassword) {
+          this.props.store.dispatch(changePassword, passwordData);
         }
 
-        console.log('action/profilePassword', profileData);
+        console.log('action/profilePassword', passwordData);
       },
     };
   }
@@ -92,40 +117,43 @@ export class ProfilePassword extends Block {
     return `
         <div class="wrapper">
           <div class="sidebar">
-              {{{Link onClick=toChat }}}
+              {{{Link onClick=back }}}
           </div>
 
           <div class="profile-main">
             <a onClick=toChat>
               <div class="circle">
-                <div class="picture"></div>
-                <p>Change avatar</p>
+                {{#if store.state.user.avatar}}
+                  <img src={{avatar}} alt="#">
+                {{else}}
+                  <div class="picture"></div>
+                {{/if}}
               </div>
             </a>
 
             <ul class="info">
               <li class="info-field"> 
-                <p>Email</p>
+                <p>Old Password</p>
                 {{{ Input class="value"
-                          value="${values.password}"
-                          ref="password"
+                          value="${values.oldPassword}"
+                          ref="oldPassword"
                           onBlur=blur
                           type="password"
-                          placeholder="password" }}}
+                          placeholder="old password" }}}
               </li>
-              {{{ InputError error="${errors.password}"}}}
+              {{{ InputError error="${errors.oldPassword}"}}}
               <hr>
 
               <li class="info-field">
-                <p>Repeat Password</p>
+                <p>New Password</p>
                 {{{ Input class="value" 
-                          value="${values.repeat}"
-                          ref="repeat"
+                          value="${values.newPassword}"
+                          ref="newPassword"
                           onBlur=blur
                           type="password"
-                          placeholder="repeat password" }}}
+                          placeholder="new password" }}}
               </li>
-              {{{ InputError error="${errors.repeat}"}}}
+              {{{ InputError error="${errors.newPassword}"}}}
               <hr>
               
   
@@ -138,3 +166,5 @@ export class ProfilePassword extends Block {
     `;
   }
 }
+
+export default withRouter(withStore(ProfilePassword));

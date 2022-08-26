@@ -6,6 +6,8 @@ import { defaultState } from './store';
 import { initApp, initChat } from './services/initApp';
 import { diffObjectsDeep, getScreenComponent, Screens } from './utils';
 
+import "./styles/style.css"
+
 import button from './components/button';
 import input from './components/input';
 import link from './components/link';

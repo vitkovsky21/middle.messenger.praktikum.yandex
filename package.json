@@ -6,7 +6,7 @@
   "author": "Vlad",
   "license": "ISC",
   "scripts": {
-    "start": "webpack serve",
+    "start": "node index.js",
     "build": "webpack",
     "dev": "webpack-dev-server --hot",
     "lint": "eslint . --ext .ts --fix",
@@ -68,9 +68,6 @@
     "stylelint-config-standard-scss": "^4.0.0",
     "stylelint-scss": "^4.2.0",
     "utils": "^0.2.2"
-  },
-  "engines": {
-    "node": ">=16.15.1"
   },
   "compilerOptions": {
     "esModuleInterop": true

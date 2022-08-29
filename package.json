@@ -2,7 +2,7 @@
   "name": "message",
   "version": "1.0.0",
   "description": "",
-  "main": false,
+  "main": "index.js",
   "author": "Vlad",
   "license": "ISC",
   "scripts": {
@@ -68,6 +68,9 @@
     "stylelint-config-standard-scss": "^4.0.0",
     "stylelint-scss": "^4.2.0",
     "utils": "^0.2.2"
+  },
+  "engines": {
+    "node": ">=16.15.1"
   },
   "compilerOptions": {
     "esModuleInterop": true

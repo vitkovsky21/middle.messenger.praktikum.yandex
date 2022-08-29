@@ -10,7 +10,9 @@
     "build": "webpack",
     "dev": "webpack-dev-server --hot",
     "lint": "eslint . --ext .ts --fix",
-    "test": "mocha"
+    "test": "mocha",
+    "prepare": "husky install",
+    "build:container": "docker build -t messenger ."
   },
   "targets": {
     "default": {
@@ -37,6 +39,7 @@
     "eslint": "^8.17.0",
     "eslint-config-airbnb": "^19.0.4",
     "html-webpack-plugin": "^5.5.0",
+    "husky": "^8.0.1",
     "mini-css-extract-plugin": "^2.6.1",
     "parcel": "^2.5.0",
     "parcel-plugin-handlebars-precompile": "^1.0.2",
@@ -74,5 +77,11 @@
   },
   "compilerOptions": {
     "esModuleInterop": true
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm-run-all test lint:all",
+      "pre-push": "npm run other command"
+    }
   }
 }

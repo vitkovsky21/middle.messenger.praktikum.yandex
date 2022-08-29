@@ -1,14 +1,39 @@
-За основу взял прототив дизайна от яндекс практикума: "https://www.figma.com/file/24EUnEHGEDNLdOcxg7ULwV/Chat?node-id=0%3A1".
-Делал не pixel perfect. Добавил от себя другую цветовую гамму, изменил внешний вид ошибок 404 и 500.
+# Messenger
 
-https://github.com/vitkovsky21/middle.messenger.praktikum.yandex/pull/18 - ссылка на Pull Request.
+### Messenger
+```
+Проект, созданный на курсе Мидл фронтенд-разработчик от Яндекс.Практикум на спринтах №1-4.
+```
 
-Пересобрал проект на handlebars. PUG не стал использовать, так как не получалось корректно рендерить шаблоны в компонентах.
-Также обновил версию node.
-netlify домен: https://62fbb70305ee800fe9275452--cosmic-valkyrie-60368c.netlify.app/. сделал новый деплой пересобранного проекта.
+## Project setup
+```
+npm install
+```
 
-команды parcel для сборки: 
-"npm run dev" и "npm run build". 
+## Node version
+```
+16.15.1 - текущая версия
+```
 
-команда для раздачи статики через express: 
-"npm run start".
+### Compiles and hot-reloads for development
+```
+npm run dev
+```
+
+### Compiles and minifies for production
+```
+npm run build
+npm run start
+```
+
+### Lints and fixes files
+```
+npm run lint
+```
+
+### Messenger
+```
+Макет, взятый за основу: https://www.figma.com/file/24EUnEHGEDNLdOcxg7ULwV/Chat?node-id=0%3A1
+Деплой в Netlify: https://cosmic-valkyrie-60368c.netlify.app/
+Деплой через docker-контейнер в Heroku: https://yandex-mess.herokuapp.com/
+```

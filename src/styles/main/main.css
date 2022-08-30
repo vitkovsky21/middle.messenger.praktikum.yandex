@@ -80,6 +80,7 @@
   font-weight: bold;
   left: 7.5rem;
   opacity: 70%;
+  pointer-events: none;
 }
 
 .friend .info {
@@ -102,6 +103,7 @@
   top: -8.25rem;
   left: 13rem !important;
   visibility: hidden;
+  pointer-events: none;
 }
 
 .friend:hover {

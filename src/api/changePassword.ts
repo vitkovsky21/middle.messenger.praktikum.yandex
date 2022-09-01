@@ -7,8 +7,7 @@ type ChangePasswordData = {
 }
 
 export default class passwordAPI extends Base {
-  changeData(data: ChangePasswordData) { return this.base.put(`${host}api/v2/user/password`, { data, headers: { 'Content-Type': 'application/json' } })}
+  changeData(data: ChangePasswordData) { return this.base.put(`${host}api/v2/user/password`, { data, headers: { 'Content-Type': 'application/json' } }); }
 
-  me() {return this.base.get(`${host}api/v2/auth/user`)}
-
-};
+  me() { return this.base.get(`${host}api/v2/auth/user`); }
+}

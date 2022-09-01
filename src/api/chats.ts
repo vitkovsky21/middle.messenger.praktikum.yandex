@@ -12,12 +12,11 @@ type UserRequest = {
 }
 
 export default class chatsAPI extends Base {
-  createChat(data: CreateChatData) { return this.base.post(`${host}api/v2/chats`, { data, headers: { 'Content-Type': 'application/json' } })}
+  createChat(data: CreateChatData) { return this.base.post(`${host}api/v2/chats`, { data, headers: { 'Content-Type': 'application/json' } }); }
 
-  addUserToChat(data: UserRequest) { return this.base.put(`${host}api/v2/chats/users`, { data, headers: { 'Content-Type': 'application/json' } })}
+  addUserToChat(data: UserRequest) { return this.base.put(`${host}api/v2/chats/users`, { data, headers: { 'Content-Type': 'application/json' } }); }
 
-  me() { return this.base.get(`${host}api/v2/chats`)}
+  me() { return this.base.get(`${host}api/v2/chats`); }
 
-  getToken(chatId: number) { return this.base.post(`${host}/api/v2/chats/token/${chatId}`)}
-
-};
+  getToken(chatId: number) { return this.base.post(`${host}/api/v2/chats/token/${chatId}`); }
+}

@@ -1,4 +1,3 @@
-
 import authAPI from '../api/auth';
 import { UserDTO } from '../api/types';
 import type { Dispatch } from '../core';
